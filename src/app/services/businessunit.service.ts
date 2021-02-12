@@ -3,6 +3,8 @@ import { InjectModel } from '@nestjs/sequelize';
 import { businessUnit } from 'src/models/model/businessUnit';
 import * as buildPaginator from 'pagination-apis';
 import { FilterWithPagination, PaginationOptionsInterface } from "src/app/complements/interface/paginator.interface";
+import { users } from 'src/models/model/user';
+import { tenant } from 'src/models/model/tenant';
 
 @Injectable()
 export class BusinessUnitService {
@@ -17,7 +19,9 @@ export class BusinessUnitService {
         const {count, rows} = await this.Model.findAndCountAll({
         limit,
         offset: skip,
-        where: {status: true}
+        where: {status: true},
+        //@ts-ignore
+        include: [users, tenant]
         });
  
       return paginate(rows, count);
@@ -25,7 +29,8 @@ export class BusinessUnitService {
 
 
     async findById(id):Promise<businessUnit[]>{
-        const findid = await this.Model.findOne({where: {id}})
+        //@ts-ignore
+        const findid = await this.Model.findOne({where: {id}, include: [users, tenant]})
         if (findid == null){  return [id, 'no hay resultados']  }
 
         return [findid]

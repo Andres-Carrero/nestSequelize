@@ -18,19 +18,13 @@ export class BusinessUserService {
         private readonly userBusinessModel: typeof businessUser,
       ){}
 
-      /*async getAll(options: PaginationOptionsInterface): Promise<FilterWithPagination>{
-        const { page, limit, skip, paginate } = buildPaginator({limit: options.limits, page: options.pages});
+      async getAll(options: PaginationOptionsInterface): Promise<any>{
         const {count, rows} = await this.userBusinessModel.findAndCountAll({
-        limit,
-        offset: skip,
-        where: {status: true},
+        limit: options.limits,
+        offset: options.pages,
         });
  
-      return paginate(rows, count);
-      }*/
-
-      async getAll(){
-        return await this.userBusinessModel.findAll()
+      return {rows, count};
       }
 
 

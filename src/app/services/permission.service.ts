@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { permission } from 'src/models/model/permission';
 import * as buildPaginator from 'pagination-apis';
 import { FilterWithPagination, PaginationOptionsInterface } from "src/app/complements/interface/paginator.interface";
+import { roles } from 'src/models/model/role';
 
 @Injectable()
 export class PermissionService {
@@ -16,7 +17,9 @@ export class PermissionService {
         const {count, rows} = await this.Model.findAndCountAll({
         limit,
         offset: skip,
-        where: {status: true}
+        where: {status: true},
+        //@ts-ignore
+        include: [roles]
         });
  
       return paginate(rows, count);
@@ -24,7 +27,8 @@ export class PermissionService {
 
           
     async findById(id):Promise<permission[]>{
-        const findid = await this.Model.findOne({where: {id}})
+        //@ts-ignore
+        const findid = await this.Model.findOne({where: {id}, include: [roles]})
         if (findid == null){return [id, 'no hay resultados']}
 
         return [findid]

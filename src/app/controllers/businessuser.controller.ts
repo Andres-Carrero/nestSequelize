@@ -31,7 +31,7 @@ export class BusinessUserController {
     }
 
 
-    /*@Get()
+    @Get()
     async index(@Request() request){
         const datas = await this.services.getAll({
             limits: request.query.hasOwnProperty('limits') ? request.query.limits : 5,
@@ -39,13 +39,8 @@ export class BusinessUserController {
           });
 
       return datas
-    }*/
-    @Get()
-    async index(){
-        const datas = await this.services.getAll();
-
-      return datas
     }
+
 
 
     @Delete(':userId')

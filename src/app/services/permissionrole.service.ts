@@ -18,19 +18,13 @@ export class PermissionRoleService {
       ){}
 
     
-      /*async getAll(options: PaginationOptionsInterface): Promise<FilterWithPagination>{
-        const { page, limit, skip, paginate } = buildPaginator({limit: options.limits, page: options.pages});
+      async getAll(options: PaginationOptionsInterface): Promise<any>{
         const {count, rows} = await this.permissionRoleModel.findAndCountAll({
-        limit,
-        offset: skip,
-        where: {status: true},
+        limit: options.limits,
+        offset: options.pages,
         });
  
-      return paginate(rows, count);
-      }*/
-
-      async getAll(){
-        return await this.permissionRoleModel.findAll()
+      return {rows, count};
       }
 
 

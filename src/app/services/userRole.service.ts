@@ -22,27 +22,27 @@ export class UserRoleService {
 
       ){}
 
-      /*async getAll(options: PaginationOptionsInterface): Promise<FilterWithPagination>{
-        const { page, limit, skip, paginate } = buildPaginator({limit: options.limits, page: options.pages});
+      async getAll(options: PaginationOptionsInterface): Promise<any>{
         const {count, rows} = await this.userRoleModel.findAndCountAll({
-        limit,
-        offset: skip,
-        where: {status: true},
+        limit: options.limits,
+        offset: options.pages,
+        
+
         });
  
-      return paginate(rows, count);
-      }*/
-
-      async getAll(){
-        return await this.userRoleModel.findAll()
+      return {rows, count};
       }
 
-    async findOne(userId){
-      const finduser = await this.userModel.findOne({where:{id: userId} }  )
-      if (finduser == null || !finduser ){return [userId, 'no hay resultados']}
 
-      const findUserRole = await this.userRoleModel.findAll({where: {userId: finduser.id}}  )
-      if (findUserRole == null || !findUserRole ){return [userId, 'no hay resultados']}
+
+    async findOne(userId){
+
+      const finduser = await this.userModel.findOne({where:{id: userId} })
+      if (finduser == null || !finduser ){return [userId, 'no hay resultados a']}
+
+
+      const findUserRole = await this.userRoleModel.findAll({where: {userId: finduser.id},  } )
+      if (findUserRole == null || !findUserRole ){return [userId, 'no hay resultados b']}
 
       return findUserRole
     }

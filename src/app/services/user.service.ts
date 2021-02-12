@@ -4,6 +4,8 @@ import { configUsers } from 'src/models/model/configUser';
 import { users } from "src/models/model/user";
 import * as buildPaginator from 'pagination-apis';
 import { FilterWithPagination, PaginationOptionsInterface } from "src/app/complements/interface/paginator.interface";
+import { roles } from 'src/models/model/role';
+import { businessUnit } from 'src/models/model/businessUnit';
 
 
 
@@ -11,9 +13,9 @@ import { FilterWithPagination, PaginationOptionsInterface } from "src/app/comple
 export class UserService {
     constructor(
       @InjectModel(users)
-      private readonly userModel: typeof users,
+      private readonly userModel:typeof users,
       @InjectModel(configUsers)
-      private readonly configModel: typeof configUsers,
+      private readonly configModel:typeof configUsers,
 
       ){}
 
@@ -22,11 +24,14 @@ export class UserService {
       async getAll(options: PaginationOptionsInterface): Promise<FilterWithPagination>{
 
         const { page, limit, skip, paginate } = buildPaginator({limit: options.limits, page: options.pages});
- 
+              
+
         const {count, rows} = await this.userModel.findAndCountAll({
         limit,
         offset: skip,
         where: {status: true},
+        //@ts-ignore
+        include: [configUsers, roles, businessUnit] 
         });
  
       return paginate(rows, count);
@@ -37,7 +42,9 @@ export class UserService {
      
   
     async uuidUser(id):Promise<users[]>{
-      const findiduser = await this.userModel.findOne({where:{id}})
+            
+      //@ts-ignore
+      const findiduser = await this.userModel.findOne({where:{id}, include: [configUsers, roles, businessUnit]  })
       if (findiduser == null){
         throw new NotFoundException('No hay resultados')
       }
@@ -46,6 +53,8 @@ export class UserService {
     
 
     async CreateUsers(user):Promise<users>{
+
+      //@ts-ignore
       const newUser = await this.userModel.create(user);
       return newUser
     }

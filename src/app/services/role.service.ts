@@ -2,8 +2,10 @@ import { Injectable, NotFoundException,  } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import * as buildPaginator from 'pagination-apis';
 import { FilterWithPagination, PaginationOptionsInterface } from "src/app/complements/interface/paginator.interface";
+import { permission } from 'src/models/model/permission';
 
 import { roles } from "src/models/model/role";
+import { users } from 'src/models/model/user';
 
 @Injectable()
 export class RoleService {
@@ -17,7 +19,9 @@ export class RoleService {
         const {count, rows} = await this.Model.findAndCountAll({
         limit,
         offset: skip,
-        where: {status: true}
+        where: {status: true},
+        //@ts-ignore
+        include: [users, permission]
         });
  
       return paginate(rows, count);

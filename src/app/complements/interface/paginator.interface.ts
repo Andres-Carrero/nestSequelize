@@ -7,6 +7,6 @@ export interface FilterWithPagination {
   }
 
   export interface PaginationOptionsInterface {
-    limits: string;
-    pages: string;
+    limits: number;
+    pages: number;
   }
