@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { tenant } from 'src/models/model/tenant';
+import * as buildPaginator from 'pagination-apis';
+import { FilterWithPagination, PaginationOptionsInterface } from "src/app/complements/interface/paginator.interface";
 
 @Injectable()
 export class TenantService {
@@ -10,18 +12,17 @@ export class TenantService {
     ){}
 
 
-    /*async paginate(options: PaginationOptionsInterface,): Promise<Pagination<tenant>> {
-        const [results, total] = await this.Model.findAndCount({where: {state: true},
-            take: options.limit,
-            skip: options.page, 
+    async getAll(options: PaginationOptionsInterface): Promise<FilterWithPagination>{
+        const { page, limit, skip, paginate } = buildPaginator({limit: options.limits, page: options.pages});
+        const {count, rows} = await this.Model.findAndCountAll({
+        limit,
+        offset: skip,
+        where: {status: true},
         });
-        
-        return new Pagination<tennanRepository>({
-            results,
-            total,
-        });
-    }*/
-
+ 
+      return paginate(rows, count);
+      }
+    
 
     async findById(id):Promise<tenant[]>{
         const findid = await this.Model.findOne({where: {id}})

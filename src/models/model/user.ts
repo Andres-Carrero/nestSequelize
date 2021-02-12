@@ -4,7 +4,6 @@ import { complement } from "./complement";
 import { roles } from "./role";
 import { configUsers } from "./configUser";
 import { businessUnit } from "./businessUnit";
-//import { usuariosInterface } from "src/app/complements/index.interface";
 import { tenant } from "./tenant";
 import { userRole } from './relations/userRole';
 import { businessUser } from './relations/businessUser';
@@ -64,12 +63,6 @@ export class users extends Model<users, complement> {
     @Column({type: DataType.STRING})
     unique_id: string 
 
-
-
-    //@ManyToMany(type => businessUnit, business => business.users, {cascade: true} )
-    //@JoinTable({name: 'userBusiness'})
-    //@JoinColumn()
-    //businessId: businessUnit[]
-
+    
 
 }

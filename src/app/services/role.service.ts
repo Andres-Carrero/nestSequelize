@@ -1,8 +1,9 @@
 import { Injectable, NotFoundException,  } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import * as buildPaginator from 'pagination-apis';
+import { FilterWithPagination, PaginationOptionsInterface } from "src/app/complements/interface/paginator.interface";
 
 import { roles } from "src/models/model/role";
-//import { PaginationOptionsInterface, Pagination } from "src/app/complements/index.interface";
 
 @Injectable()
 export class RoleService {
@@ -11,17 +12,15 @@ export class RoleService {
         private readonly Model: typeof roles,
     ){}
         
-    /*async paginate(options: PaginationOptionsInterface,): Promise<Pagination<rolesRepository>> {
-        const [results, total] = await this.Model.findAndCount({where: {state: true},
-        take: options.limit,
-        skip: options.page, 
+    async getAll(options: PaginationOptionsInterface): Promise<FilterWithPagination>{
+        const { page, limit, skip, paginate } = buildPaginator({limit: options.limits, page: options.pages});
+        const {count, rows} = await this.Model.findAndCountAll({
+        limit,
+        offset: skip,
         });
-        
-        return new Pagination<rolesRepository>({
-        results,
-        total,
-        });
-    }*/
+ 
+      return paginate(rows, count);
+      }
       
     
     async findById(id):Promise<roles[]>{

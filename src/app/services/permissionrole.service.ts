@@ -3,6 +3,8 @@ import { InjectModel } from '@nestjs/sequelize';
 import { permission } from 'src/models/model/permission';
 import { permissionRole } from 'src/models/model/relations/permissionRole';
 import { roles } from 'src/models/model/role';
+import * as buildPaginator from 'pagination-apis';
+import { FilterWithPagination, PaginationOptionsInterface } from "src/app/complements/interface/paginator.interface";
 
 @Injectable()
 export class PermissionRoleService {
@@ -14,6 +16,23 @@ export class PermissionRoleService {
         @InjectModel(permissionRole)
         private readonly permissionRoleModel: typeof permissionRole,
       ){}
+
+    
+      /*async getAll(options: PaginationOptionsInterface): Promise<FilterWithPagination>{
+        const { page, limit, skip, paginate } = buildPaginator({limit: options.limits, page: options.pages});
+        const {count, rows} = await this.permissionRoleModel.findAndCountAll({
+        limit,
+        offset: skip,
+        where: {status: true},
+        });
+ 
+      return paginate(rows, count);
+      }*/
+
+      async getAll(){
+        return await this.permissionRoleModel.findAll()
+      }
+
 
 
     async findOne(permissionId){

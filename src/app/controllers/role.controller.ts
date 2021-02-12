@@ -10,13 +10,15 @@ export class RoleController {
     constructor(private services: RoleService){}
 
 
-    /*@Get()
-    async index(@Request() request): Promise<Pagination<rolesRepository>> {
-      return await this.services.paginate({
-        limit: request.query.hasOwnProperty('limit') ? request.query.limit : 5,
-        page: request.query.hasOwnProperty('page') ? request.query.page : 0,
-      });
-    }*/
+    @Get()
+    async index(@Request() request){
+        const datas = await this.services.getAll({
+            limits: request.query.hasOwnProperty('limits') ? request.query.limits : 5,
+            pages: request.query.hasOwnProperty('pages') ? request.query.pages : 0,
+          });
+
+      return datas
+    }
 
     @Get(':id')
     findByUuid(@Param('id') id:number):Promise<roles[]>{

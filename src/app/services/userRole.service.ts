@@ -4,6 +4,11 @@ import sequelize from 'sequelize';
 import { roles } from 'src/models/model/role';
 import { users } from 'src/models/model/user';
 import { userRole } from 'src/models/model/relations/userRole';
+import { FilterWithPagination, PaginationOptionsInterface } from '../complements/interface/paginator.interface';
+import buildPaginator from 'pagination-apis';
+
+
+
 
 @Injectable()
 export class UserRoleService {
@@ -17,12 +22,20 @@ export class UserRoleService {
 
       ){}
 
-      async findAll():Promise<userRole[]>{
-        const findUserRole = await this.userRoleModel.findAll()
-        return findUserRole
+      /*async getAll(options: PaginationOptionsInterface): Promise<FilterWithPagination>{
+        const { page, limit, skip, paginate } = buildPaginator({limit: options.limits, page: options.pages});
+        const {count, rows} = await this.userRoleModel.findAndCountAll({
+        limit,
+        offset: skip,
+        where: {status: true},
+        });
+ 
+      return paginate(rows, count);
+      }*/
+
+      async getAll(){
+        return await this.userRoleModel.findAll()
       }
-
-
 
     async findOne(userId){
       const finduser = await this.userModel.findOne({where:{id: userId} }  )

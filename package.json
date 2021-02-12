@@ -30,6 +30,7 @@
     "mysql2": "^2.2.5",
     "nestjs-paginator": "^0.2.0",
     "nestjs-sequelize-paginate": "^1.0.0",
+    "pagination-apis": "^1.0.8",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
     "postgres": "^1.0.2",
@@ -38,7 +39,10 @@
     "rxjs": "^6.6.3",
     "sequelize": "^6.5.0",
     "sequelize-cli-typescript": "^3.2.0-c",
+    "sequelize-paginate": "^1.1.6",
     "sequelize-typescript": "^2.0.0",
+    "sequelize-typescript-paginate": "^1.1.0",
+    "ts-pagination": "^2.0.2",
     "typeorm": "^0.2.31"
   },
   "devDependencies": {

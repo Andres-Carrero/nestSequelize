@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Request } from '@nestjs/common';
 import { permissionRole } from 'src/models/model/relations/permissionRole';
 import { BusinessUserService } from '../services/businessuser.service';
 
@@ -31,9 +31,20 @@ export class BusinessUserController {
     }
 
 
+    /*@Get()
+    async index(@Request() request){
+        const datas = await this.services.getAll({
+            limits: request.query.hasOwnProperty('limits') ? request.query.limits : 5,
+            pages: request.query.hasOwnProperty('pages') ? request.query.pages : 0,
+          });
+
+      return datas
+    }*/
     @Get()
-    async findAll(){
-      return this.services.findAll();
+    async index(){
+        const datas = await this.services.getAll();
+
+      return datas
     }
 
 

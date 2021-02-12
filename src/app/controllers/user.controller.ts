@@ -11,18 +11,15 @@ export class UserController {
     constructor(private services: UserService){}
 
 
-    /*@Get()
-    async index(@Request() request): Promise<Pagination<users>> {
-      return await this.services.paginate({
-        limit: request.query.hasOwnProperty('limit') ? request.query.limit : 5,
-        page: request.query.hasOwnProperty('page') ? request.query.page : 0,
-      });
-    }*/
     @Get()
-    public getAll() {
-      return this.services.getAll();
-    }
+    async index(@Request() request){
+        const datas = await this.services.getAll({
+            limits: request.query.hasOwnProperty('limits') ? request.query.limits : 5,
+            pages: request.query.hasOwnProperty('pages') ? request.query.pages : 0,
+          });
 
+      return datas
+    }
 
 
     @Get(':id')

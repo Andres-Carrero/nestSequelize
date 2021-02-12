@@ -2,6 +2,8 @@ import { Injectable, NotFoundException,  } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { configUsers } from 'src/models/model/configUser';
 import { users } from "src/models/model/user";
+import * as buildPaginator from 'pagination-apis';
+import { FilterWithPagination, PaginationOptionsInterface } from "src/app/complements/interface/paginator.interface";
 
 
 
@@ -12,14 +14,25 @@ export class UserService {
       private readonly userModel: typeof users,
       @InjectModel(configUsers)
       private readonly configModel: typeof configUsers,
+
       ){}
-          
 
+    
 
+      async getAll(options: PaginationOptionsInterface): Promise<FilterWithPagination>{
 
-      public getAll(){
-        return this.userModel.findAll()
+        const { page, limit, skip, paginate } = buildPaginator({limit: options.limits, page: options.pages});
+ 
+        const {count, rows} = await this.userModel.findAndCountAll({
+        limit,
+        offset: skip,
+        where: {status: true},
+        });
+ 
+      return paginate(rows, count);
       }
+
+
     
      
   

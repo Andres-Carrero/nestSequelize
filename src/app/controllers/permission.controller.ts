@@ -9,13 +9,15 @@ export class PermissionController {
     constructor(private services: PermissionService){}
 
 
-    /*@Get()
-    async index(@Request() request): Promise<Pagination<permissionsRepository>> {
-      return await this.services.paginate({
-        limit: request.query.hasOwnProperty('limit') ? request.query.limit : 2,
-        page: request.query.hasOwnProperty('page') ? request.query.page : 0,
-      });
-    }*/
+    @Get()
+    async index(@Request() request){
+        const datas = await this.services.getAll({
+            limits: request.query.hasOwnProperty('limits') ? request.query.limits : 5,
+            pages: request.query.hasOwnProperty('pages') ? request.query.pages : 0,
+          });
+
+      return datas
+    }
     
 
     @Get(':id')

@@ -4,6 +4,8 @@ import { businessUnit } from 'src/models/model/businessUnit';
 import { businessUser } from 'src/models/model/relations/businessUser';
 import { permissionRole } from 'src/models/model/relations/permissionRole';
 import { users } from 'src/models/model/user';
+import * as buildPaginator from 'pagination-apis';
+import { FilterWithPagination, PaginationOptionsInterface } from "src/app/complements/interface/paginator.interface";
 
 @Injectable()
 export class BusinessUserService {
@@ -15,6 +17,21 @@ export class BusinessUserService {
         @InjectModel(businessUser)
         private readonly userBusinessModel: typeof businessUser,
       ){}
+
+      /*async getAll(options: PaginationOptionsInterface): Promise<FilterWithPagination>{
+        const { page, limit, skip, paginate } = buildPaginator({limit: options.limits, page: options.pages});
+        const {count, rows} = await this.userBusinessModel.findAndCountAll({
+        limit,
+        offset: skip,
+        where: {status: true},
+        });
+ 
+      return paginate(rows, count);
+      }*/
+
+      async getAll(){
+        return await this.userBusinessModel.findAll()
+      }
 
 
     async findOne(userId){

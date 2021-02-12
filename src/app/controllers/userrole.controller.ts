@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Request } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 
 import { users } from 'src/models/model/user';
@@ -35,9 +35,20 @@ export class UserRoleController {
     }
 
 
+    /*@Get()
+    async index(@Request() request){
+        const datas = await this.services.getAll({
+            limits: request.query.hasOwnProperty('limits') ? request.query.limits : 5,
+            pages: request.query.hasOwnProperty('pages') ? request.query.pages : 0,
+          });
+
+      return datas
+    }*/
     @Get()
-    async findAll():Promise<userRole[]>{
-      return this.services.findAll();
+    async index(){
+        const datas = await this.services.getAll();
+
+      return datas
     }
 
 
