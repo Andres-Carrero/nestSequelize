@@ -19,7 +19,7 @@ import { permissionRole } from './relations/permissionRole';
     tableName: 'role',
     timestamps: true
 })
-export class roles extends Model<complement>{
+export class roles extends Model<roles, complement>{
     
     @AllowNull(false)
     @Column({type: DataType.STRING})

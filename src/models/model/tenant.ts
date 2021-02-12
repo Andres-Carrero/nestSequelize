@@ -19,7 +19,7 @@ import { roles } from "./role";
     tableName: 'tenant',
     timestamps: true
 })
-export class tenant extends Model {
+export class tenant extends Model<tenant, complement> {
 
     @Column({type: DataType.STRING})
     name: string

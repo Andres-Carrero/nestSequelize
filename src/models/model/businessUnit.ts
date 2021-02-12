@@ -12,16 +12,14 @@ import {
 } from 'sequelize-typescript';
 import { complement } from './complement'
 import { tenant } from "./tenant";
-import { configUsers } from "./configUser";
 import { users } from "./user";
-import { userRole } from './relations/userRole';
 import { businessUser } from './relations/businessUser';
 
 @Table({
     tableName: 'businessUnit',
     timestamps: true
 })
-export class businessUnit extends Model<complement> {
+export class businessUnit extends Model<businessUnit, complement> {
 
     @AllowNull(false)
     @Column({type: DataType.STRING})

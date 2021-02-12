@@ -1,10 +1,8 @@
 import { Column,Model,Table,Unique,DataType,AllowNull,DeletedAt,BelongsTo,ForeignKey,BelongsToMany,HasOne} from 'sequelize-typescript';
-import * as Sequelize from 'sequelize'
 import { complement } from "./complement";
 import { roles } from "./role";
 import { configUsers } from "./configUser";
 import { businessUnit } from "./businessUnit";
-import { tenant } from "./tenant";
 import { userRole } from './relations/userRole';
 import { businessUser } from './relations/businessUser';
 
@@ -12,7 +10,7 @@ import { businessUser } from './relations/businessUser';
     tableName: 'user',
     timestamps: true
 })
-export class users extends Model<users, complement> {
+export class users extends Model<users, complement>{
 
     @AllowNull(false)
     @Column({type: DataType.STRING})

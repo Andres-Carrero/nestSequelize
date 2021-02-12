@@ -17,6 +17,7 @@ export class BusinessUnitService {
         const {count, rows} = await this.Model.findAndCountAll({
         limit,
         offset: skip,
+        where: {status: true}
         });
  
       return paginate(rows, count);

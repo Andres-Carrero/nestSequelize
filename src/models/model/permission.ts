@@ -18,7 +18,7 @@ import { roles } from "./role";
     tableName: 'permission',
     timestamps: true
 })
-export class permission extends Model<complement>{
+export class permission extends Model<permission, complement>{
     
     
     @AllowNull(false)
