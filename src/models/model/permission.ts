@@ -9,7 +9,7 @@ import {
     BelongsToMany
 } from 'sequelize-typescript';
 import { complement } from "./complement";
-import { permissionRole } from './permissionRole';
+import { permissionRole } from './relations/permissionRole';
 import { roles } from "./role";
 
 

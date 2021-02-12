@@ -1,8 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import sequelize from 'sequelize';
 import { roles } from 'src/models/model/role';
 import { users } from 'src/models/model/user';
-import { userRole } from 'src/models/model/userRole';
+import { userRole } from 'src/models/model/relations/userRole';
 
 @Injectable()
 export class UserRoleService {
@@ -13,49 +14,68 @@ export class UserRoleService {
         private readonly roleModel: typeof roles,
         @InjectModel(userRole)
         private readonly userRoleModel: typeof userRole,
+
       ){}
-  
-  
-  
-    async setRoleToUser(userId, roleId) {
-        const user = 5
-        const role = 1
 
-        const roles = [userId = user, roleId = role]
+      async findAll():Promise<userRole[]>{
+        const findUserRole = await this.userRoleModel.findAll()
+        return findUserRole
+      }
 
-        const newUser = await this.userRoleModel.create(roles);
-        console.log(newUser);
-        
-        return newUser
-        /*console.log(userId);
-        console.log(roleId);
-        
-        
-      const userExist = await this.userModel.findOne({where: {id: userId}});
-      const roleExist = await this.roleModel.findOne({where: {id: roleId}});
-        console.log(userExist);
-        console.log(roleExist);
-        
-  
-      if (!roleExist){ throw new NotFoundException('Role not exist: ' + roleId)  }
-      if (!userExist){ throw new NotFoundException('user not exist: ' + userId)  }
 
-      userExist. = [
-        roleExist,
-      ]
-        
-      const newRole = await this.userRoleModel.create(roleId, userId);
-      console.log(newRole);
-      
-      return [newRole,'Relacion creada con exito']*/
 
+    async findOne(userId){
+      const finduser = await this.userModel.findOne({where:{id: userId} }  )
+      if (finduser == null || !finduser ){return [userId, 'no hay resultados']}
+
+      const findUserRole = await this.userRoleModel.findAll({where: {userId: finduser.id}}  )
+      if (findUserRole == null || !findUserRole ){return [userId, 'no hay resultados']}
+
+      return findUserRole
     }
   
   
+    async Create(userId, roleId){
+      const finduser = await this.userModel.findOne({where:{id: userId} }  )
+      if (finduser == null || !finduser ){return [userId, 'no hay resultados']}
+
+      const findrole = await this.roleModel.findOne({where: {id: roleId}  } )
+      if (findrole == null || !findrole ){return [roleId, 'no hay resultados']}
+
+      const newUserRole = await this.userRoleModel.create({
+        userId: finduser.id,
+        roleId: findrole.id
+      });
+
+      return [newUserRole, finduser, findrole]
+    }
+
+
+    async update(userId, roleId):Promise<userRole[]>{
+      const finduser = await this.userModel.findOne({where:{id: userId} })
+      if (finduser == null || !finduser ){return [userId, 'no hay resultados']}
+
+      const findrole = await this.roleModel.findOne({where: {id: roleId}  } )
+      if (findrole == null || !findrole ){return [roleId, 'no hay resultados']}
+      
+      await this.userRoleModel.destroy({where: {userId: finduser.id}})
+      const newUserRole = await this.userRoleModel.create({
+        userId: finduser.id,
+        roleId: findrole.id
+      });
+     
+      return [newUserRole]
+    }
+
+
+    async deleteAll(userId){
+      const finduser = await this.userModel.findOne({where:{id: userId} })
+      if (finduser == null || !finduser ){return [userId, 'no hay resultados']}
+      
+      const deletes = await this.userRoleModel.destroy({where: {userId: finduser.id}})    
+      return deletes
+    }
+ 
   
-  
-  
-  
-  
-  }
+}
   

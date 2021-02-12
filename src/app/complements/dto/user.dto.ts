@@ -1,4 +1,4 @@
-import { businessUser } from "src/models/model/businessUser";
+import { businessUser } from "src/models/model/relations/businessUser";
 import { complement } from "src/models/model/complement";
 import { configUsers } from "src/models/model/configUser";
 import { roles } from "src/models/model/role";
@@ -18,34 +18,4 @@ extends complement {
     deleteAt: Date
     status: boolean
     unique_id: string 
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export class userRoleDto{
-    a: number 
-    b: number 
-    c: number 
-    d: number
-    e: number
-}
-
-
-
-export class permissionRoleDto{
-    id_roles: number
-    id_permission: number
 }

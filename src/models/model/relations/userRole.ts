@@ -9,10 +9,8 @@ import {
     AllowNull,
     BelongsToMany
 } from 'sequelize-typescript';
-import { complement } from "./complement";
-import { businessUnit } from "./businessUnit";
-import { users } from './user';
-import { roles } from "./role";
+import { users } from '../user';
+import { roles } from "../role";
 
 @Table({
     tableName: 'userRole',

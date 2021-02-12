@@ -10,8 +10,8 @@ import {
     BelongsToMany
 } from 'sequelize-typescript';
 
-import { roles } from "./role";
-import { permission } from './permission';
+import { roles } from "../role";
+import { permission } from '../permission';
 
 @Table({
     tableName: 'permissionRole',

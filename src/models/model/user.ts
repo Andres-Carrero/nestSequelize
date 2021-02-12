@@ -6,8 +6,8 @@ import { configUsers } from "./configUser";
 import { businessUnit } from "./businessUnit";
 //import { usuariosInterface } from "src/app/complements/index.interface";
 import { tenant } from "./tenant";
-import { userRole } from './userRole';
-import { businessUser } from './businessUser';
+import { userRole } from './relations/userRole';
+import { businessUser } from './relations/businessUser';
 
 @Table({
     tableName: 'user',

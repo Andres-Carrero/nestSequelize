@@ -4,6 +4,7 @@ import { configUsers } from 'src/models/model/configUser';
 import { users } from "src/models/model/user";
 
 
+
 @Injectable()
 export class UserService {
     constructor(
@@ -13,19 +14,14 @@ export class UserService {
       private readonly configModel: typeof configUsers,
       ){}
           
-    /*async paginate(options: PaginationOptionsInterface,):Promise<Pagination<users>> {
-        const [results, total] = await this.userModel.findAndCount({where: {state: true},
-          take: options.limit,
-          skip: options.page, 
-        });
-        //console.log(this.usersEntity.manager.save(results));
-        
-        return new Pagination<users>({
-          results,
-          total,
-        });
-      }*/
-  
+
+
+
+      public getAll(){
+        return this.userModel.findAll()
+      }
+    
+     
   
     async uuidUser(id):Promise<users[]>{
       const findiduser = await this.userModel.findOne({where:{id}})
@@ -50,7 +46,7 @@ export class UserService {
   
     async deleteUsers(id,  user):Promise<users[]>{
       const userdelete = await this.userModel.update( user, {where: {id}})
-      return [id, user]
+      return [id, user, userdelete]
     }
   
   

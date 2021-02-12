@@ -11,9 +11,9 @@ import {
 import { complement } from "./complement";
 import { users } from "./user";
 import { tenant } from "./tenant";
-import { userRole } from './userRole';
+import { userRole } from './relations/userRole';
 import { permission } from './permission';
-import { permissionRole } from './permissionRole';
+import { permissionRole } from './relations/permissionRole';
 
 @Table({
     tableName: 'role',

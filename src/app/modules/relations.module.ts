@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { businessUser } from 'src/models/model/businessUser';
-import { permissionRole } from 'src/models/model/permissionRole';
-import { userRole } from 'src/models/model/userRole';
+import { businessUser } from 'src/models/model/relations/businessUser';
+import { permissionRole } from 'src/models/model/relations/permissionRole';
+import { userRole } from 'src/models/model/relations/userRole';
 
 @Module({
     imports: [

@@ -1,10 +1,10 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, Res, Request, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, Res, Request, ParseIntPipe, HttpStatus  } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 
 import { users } from "src/models/model/user";
-import { UsersDto, userRoleDto } from "src/app/complements/dto/user.dto";
+import { UsersDto } from "src/app/complements/dto/user.dto";
 import { UserService } from "src/app/services/user.service";
-//import { Pagination } from "src/app/complements/index.interface";
+import {Paginator,PaginatorQuery,paginator,Paginated,} from 'nestjs-paginator';
 
 
 @Controller('users')
@@ -19,6 +19,11 @@ export class UserController {
         page: request.query.hasOwnProperty('page') ? request.query.page : 0,
       });
     }*/
+    @Get()
+    public getAll() {
+      return this.services.getAll();
+    }
+
 
 
     @Get(':id')

@@ -14,8 +14,8 @@ import { complement } from './complement'
 import { tenant } from "./tenant";
 import { configUsers } from "./configUser";
 import { users } from "./user";
-import { userRole } from './userRole';
-import { businessUser } from './businessUser';
+import { userRole } from './relations/userRole';
+import { businessUser } from './relations/businessUser';
 
 @Table({
     tableName: 'businessUnit',
