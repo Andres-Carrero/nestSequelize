@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { users } from "src/models/model/user";
 import { UsersDto } from "src/app/complements/dto/user.dto";
 import { UserService } from "src/app/services/user.service";
-import {Paginator,PaginatorQuery,paginator,Paginated,} from 'nestjs-paginator';
 
 
 @Controller('users')
