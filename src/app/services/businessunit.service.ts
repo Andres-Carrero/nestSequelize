@@ -30,7 +30,7 @@ export class BusinessUnitService {
 
     async findById(id):Promise<businessUnit[]>{
         //@ts-ignore
-        const findid = await this.Model.findOne({where: {id}, include: [users, tenant]})
+        const findid = await this.Model.findOne({where: {unique_id: id}, include: [users, tenant]})
         if (findid == null){  return [id, 'no hay resultados']  }
 
         return [findid]
@@ -44,13 +44,13 @@ export class BusinessUnitService {
        
     
     async Update(id, data ):Promise<businessUnit[]>{
-        const update = await this.Model.update(data, {where: {id}})
+        const update = await this.Model.update(data, {where: {unique_id: id}})
         return data
     }
         
 
     async delete(id, data):Promise<businessUnit[]>{
-        const eliminate = await this.Model.update(data, {where: {id}})
+        const eliminate = await this.Model.update(data, {where: {unique_id: id}})
         return [id, data]
     }
 

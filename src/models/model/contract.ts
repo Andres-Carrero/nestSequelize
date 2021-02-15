@@ -7,22 +7,20 @@ import {
     DeletedAt,
     Unique,
     ForeignKey,
-    HasOne,
     BelongsTo,
     BelongsToMany,
     HasMany
 } from 'sequelize-typescript';
 import { complement } from './complement'
-import { tenant } from "./tenant";
-import { users } from "./user";
-import { businessUser } from './relations/businessUser';
-import { Contract } from "./contract";
+import { businessUnit } from "./businessUnit";
+import { Process } from "./process";
+
 
 @Table({
-    tableName: 'businessUnit',
+    tableName: 'Contract',
     timestamps: true
 })
-export class businessUnit extends Model<businessUnit, complement> {
+export class Contract extends Model<Contract, complement> {
 
     @AllowNull(false)
     @Column({type: DataType.STRING})
@@ -31,19 +29,6 @@ export class businessUnit extends Model<businessUnit, complement> {
     @AllowNull(false)
     @Column({type: DataType.STRING})
     description: string;
-
-    //@ts-ignore
-    @BelongsToMany(() => users, () => businessUser)
-    user: users
-
-    //@ts-ignore
-    @ForeignKey(() => tenant)
-    @Column
-    tenantId: number;
-      
-    // @ts-ignore
-    @BelongsTo(() => tenant)
-    tenant: tenant;
 
     @DeletedAt
     @Column({type: DataType.DATE})
@@ -57,9 +42,17 @@ export class businessUnit extends Model<businessUnit, complement> {
     unique_id: string 
 
     // @ts-ignore 
-    @HasMany(() => Contract)
-    contract: Contract;
+    @ForeignKey(() => businessUnit)
+    @Column
+    businessId: number;
+      
+    // @ts-ignore 
+    @BelongsTo(() => businessUnit)
+    business: businessUnit;
 
+    // @ts-ignore 
+    @HasMany(() => Process)
+    process: Process;
 
-    
+        
 }

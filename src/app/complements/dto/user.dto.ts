@@ -13,8 +13,6 @@ extends complement {
     password: string;
     roles: roles;
     business: businessUser;
-    configId: number;
-    config: configUsers;
     deleteAt: Date
     status: boolean
     unique_id: string 

@@ -8,6 +8,8 @@ import { UserRoleModule } from './modules/relations/userrole.module';
 import { RoleModule } from './modules/role.module';
 import { UserModule } from './modules/user.module';
 import { TenantModule } from "./modules/tenant.module";
+import { ContractModule } from './modules/contract.module';
+import { ProcessModule } from './modules/process.module';
 
 
 @Module({
@@ -20,7 +22,9 @@ import { TenantModule } from "./modules/tenant.module";
         PermissionRoleModule,
         UserRoleModule,
         PermissionModule,
+        ContractModule,
         BusinessUnitModule,
+        ProcessModule
     ],
     controllers: [],
     providers: [],

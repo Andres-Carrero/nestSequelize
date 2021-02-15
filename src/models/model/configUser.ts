@@ -4,13 +4,11 @@ import {
     Table, 
     AllowNull,
     DataType,
-    HasMany,
     DeletedAt,
     Unique,
-    PrimaryKey,
-    AutoIncrement,
-    CreatedAt,
-    UpdatedAt
+    ForeignKey,
+    BelongsTo,
+
 } from 'sequelize-typescript';
 
 import { complement } from "./complement";
@@ -43,9 +41,14 @@ export class configUsers extends Model<configUsers, complement> {
     @Column({type: DataType.STRING})
     country: string
 
-    // @ts-ignore
-    @HasMany(() => users)
-    user: users[];
+    //@ts-ignore
+    @ForeignKey(() => users)
+    @Column
+    userId: number;
+      
+    // @ts-ignore 
+    @BelongsTo(() => users)
+    user: users;
 
     @DeletedAt
     @Column({type: DataType.DATE})

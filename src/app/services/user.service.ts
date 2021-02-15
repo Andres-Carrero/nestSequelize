@@ -42,9 +42,10 @@ export class UserService {
      
   
     async uuidUser(id):Promise<users[]>{
-            
+      console.log(id);
+      
       //@ts-ignore
-      const findiduser = await this.userModel.findOne({where:{id}, include: [configUsers, roles, businessUnit]  })
+      const findiduser = await this.userModel.findOne({where:{unique_id: id}, include: [configUsers, roles, businessUnit]  })
       if (findiduser == null){
         throw new NotFoundException('No hay resultados')
       }
@@ -61,13 +62,13 @@ export class UserService {
           
   
     async UpdateUsers(id, user ):Promise<users[]>{
-      const update = await this.userModel.update(user, {where: {id}})
+      const update = await this.userModel.update(user, {where: {unique_id: id}})
       return user
     }
           
   
     async deleteUsers(id,  user):Promise<users[]>{
-      const userdelete = await this.userModel.update( user, {where: {id}})
+      const userdelete = await this.userModel.update( user, {where: {unique_id: id}})
       return [id, user, userdelete]
     }
   

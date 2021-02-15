@@ -6,8 +6,9 @@ extends complement {
     language: string
     time_zone: Date  
     country: string
-    user: users[];
+    user: users;
     deleteAt: Date
     status: boolean
-    unique_id: string 
+    unique_id: string  
+    userId: number
 }

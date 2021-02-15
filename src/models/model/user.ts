@@ -1,4 +1,4 @@
-import { Column,Model,Table,Unique,DataType,AllowNull,DeletedAt,BelongsTo,ForeignKey,BelongsToMany,HasOne} from 'sequelize-typescript';
+import { Column,Model,Table,Unique,DataType,AllowNull,DeletedAt,BelongsToMany,HasMany} from 'sequelize-typescript';
 import { complement } from "./complement";
 import { roles } from "./role";
 import { configUsers } from "./configUser";
@@ -41,14 +41,9 @@ export class users extends Model<users, complement>{
     @BelongsToMany(() => businessUnit, () => businessUser)
     business: businessUnit
 
-    //@ts-ignore
-    @ForeignKey(() => configUsers)
-    @Column
-    configId: number;
-  
-    // @ts-ignore 
-    @BelongsTo(() => configUsers)
-    config: configUsers;
+    // @ts-ignore
+    @HasMany(() => configUsers)
+    user: configUsers[];
 
     @DeletedAt
     @Column({type: DataType.DATE})

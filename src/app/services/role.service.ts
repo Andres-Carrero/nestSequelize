@@ -29,7 +29,7 @@ export class RoleService {
       
     
     async findById(id):Promise<roles[]>{
-        const findid = await this.Model.findOne({where: {id}})
+        const findid = await this.Model.findOne({where: {unique_id: id}})
         if (findid == null){return [id, 'no hay resultados']}
 
         return [findid]
@@ -43,13 +43,13 @@ export class RoleService {
     
     
     async Update(id, data ):Promise<roles[]>{
-        const update = await this.Model.update(data, {where: {id}})
+        const update = await this.Model.update(data, {where: {unique_id: id}})
         return data
     }
     
     
     async delete(id, data):Promise<roles[]>{
-        const eliminate = await this.Model.update(data, {where: {id}})
+        const eliminate = await this.Model.update(data, {where: {unique_id: id}})
         return [id, data]
     }
    

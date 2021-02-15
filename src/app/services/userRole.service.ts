@@ -22,27 +22,24 @@ export class UserRoleService {
 
       ){}
 
-      async getAll(options: PaginationOptionsInterface): Promise<any>{
-        const {count, rows} = await this.userRoleModel.findAndCountAll({
+    async getAll(options: PaginationOptionsInterface): Promise<any>{
+      const {count, rows} = await this.userRoleModel.findAndCountAll({
         limit: options.limits,
         offset: options.pages,
-        
-
-        });
- 
+      });
       return {rows, count};
-      }
+    }
 
 
 
     async findOne(userId){
-
+      //@ts-ignore
       const finduser = await this.userModel.findOne({where:{id: userId} })
-      if (finduser == null || !finduser ){return [userId, 'no hay resultados a']}
+      if (finduser == null || !finduser ){return [userId, 'no hay resultados']}
 
 
       const findUserRole = await this.userRoleModel.findAll({where: {userId: finduser.id},  } )
-      if (findUserRole == null || !findUserRole ){return [userId, 'no hay resultados b']}
+      if (findUserRole == null || !findUserRole ){return [userId, 'no hay resultados']}
 
       return findUserRole
     }

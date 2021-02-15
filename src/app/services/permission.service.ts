@@ -28,7 +28,7 @@ export class PermissionService {
           
     async findById(id):Promise<permission[]>{
         //@ts-ignore
-        const findid = await this.Model.findOne({where: {id}, include: [roles]})
+        const findid = await this.Model.findOne({where: {unique_id: id}, include: [roles]})
         if (findid == null){return [id, 'no hay resultados']}
 
         return [findid]
@@ -42,13 +42,13 @@ export class PermissionService {
       
     
     async Update(id, data ):Promise<permission[]>{
-        const update = await this.Model.update(data, {where: {id}})
+        const update = await this.Model.update(data, {where: {unique_id: id}})
         return data
     }
     
         
     async delete(id, data):Promise<permission[]>{
-        const eliminate = await this.Model.update(data, {where: {id}})
+        const eliminate = await this.Model.update(data, {where: {unique_id: id}})
         return [id, data]
     }
 }
