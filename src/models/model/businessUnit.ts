@@ -17,6 +17,8 @@ import { tenant } from "./tenant";
 import { users } from "./user";
 import { businessUser } from './relations/businessUser';
 import { Contract } from "./contract";
+import { typeServices } from './typesServices';
+import { roles } from './role';
 
 @Table({
     tableName: 'businessUnit',
@@ -59,6 +61,23 @@ export class businessUnit extends Model<businessUnit, complement> {
     // @ts-ignore 
     @HasMany(() => Contract)
     contract: Contract;
+
+    // @ts-ignore 
+    @HasMany(() => typeServices)
+    typeServices: typeServices;
+
+    // @ts-ignore 
+    @HasMany(() => typeServices)
+    typeDoc: typeServices;
+
+    // @ts-ignore 
+    @ForeignKey(() => roles)
+    @Column
+    roleId: number;
+              
+    // @ts-ignore 
+    @BelongsTo(() => roles)
+    role: roles;
 
 
     

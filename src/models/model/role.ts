@@ -6,7 +6,8 @@ import {
     DataType,
     DeletedAt,
     AllowNull,
-    BelongsToMany
+    BelongsToMany,
+    HasMany
 } from 'sequelize-typescript';
 import { complement } from "./complement";
 import { users } from "./user";
@@ -14,6 +15,7 @@ import { tenant } from "./tenant";
 import { userRole } from './relations/userRole';
 import { permission } from './permission';
 import { permissionRole } from './relations/permissionRole';
+import { businessUnit } from './businessUnit';
 
 @Table({
     tableName: 'role',
@@ -48,5 +50,10 @@ export class roles extends Model<roles, complement>{
     @Unique(true)
     @Column({type: DataType.STRING})
     unique_id: string 
+
+    //@ts-ignore
+    @HasMany(() => businessUnit)
+    business: businessUnit;
+
 
 }

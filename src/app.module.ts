@@ -1,3 +1,5 @@
+import { TypeIdentificationDocModule } from './app/modules/typeIdentificationDoc.module';
+import { TypesServicesModule } from './app/modules/typesServices.module';
 import { IndexModule } from './app/index.module';
 
 import { Module } from '@nestjs/common';
@@ -7,6 +9,7 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [
+
     IndexModule,
 
     SequelizeModule.forRoot({

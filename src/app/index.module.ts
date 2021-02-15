@@ -10,10 +10,14 @@ import { UserModule } from './modules/user.module';
 import { TenantModule } from "./modules/tenant.module";
 import { ContractModule } from './modules/contract.module';
 import { ProcessModule } from './modules/process.module';
+import { TypesServicesModule } from './modules/typesServices.module';
+import { TypeIdentificationDocModule } from './modules/typeIdentificationDoc.module';
 
 
 @Module({
     imports: [
+        TypeIdentificationDocModule,
+        TypesServicesModule,
         UserModule,
         RoleModule,
         ConfigUserModule,

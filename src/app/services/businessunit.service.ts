@@ -5,6 +5,7 @@ import * as buildPaginator from 'pagination-apis';
 import { FilterWithPagination, PaginationOptionsInterface } from "src/app/complements/interface/paginator.interface";
 import { users } from 'src/models/model/user';
 import { tenant } from 'src/models/model/tenant';
+import { roles } from 'src/models/model/role';
 
 @Injectable()
 export class BusinessUnitService {
@@ -21,7 +22,7 @@ export class BusinessUnitService {
         offset: skip,
         where: {status: true},
         //@ts-ignore
-        include: [users, tenant]
+        include: [users, tenant, roles]
         });
  
       return paginate(rows, count);
@@ -30,7 +31,7 @@ export class BusinessUnitService {
 
     async findById(id):Promise<businessUnit[]>{
         //@ts-ignore
-        const findid = await this.Model.findOne({where: {unique_id: id}, include: [users, tenant]})
+        const findid = await this.Model.findOne({where: {unique_id: id}, include: [users, tenant, roles]})
         if (findid == null){  return [id, 'no hay resultados']  }
 
         return [findid]
