@@ -28,7 +28,7 @@ export class TenantController {
 
     @Post()
     create(@Body() IndexDto:TennanDto):Promise<tenant>{
-        IndexDto.unique_id = 'Tenant:' + uuidv4() 
+        IndexDto.unique_id = uuidv4() 
         return this.services.Create(IndexDto)
     }
 

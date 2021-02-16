@@ -28,7 +28,7 @@ export class TypesServicesController {
 
     @Post()
     create(@Body() IndexDto:typeServicesDto):Promise<typeServices>{
-        IndexDto.unique_id = 'TypeServices:' + uuidv4()
+        IndexDto.unique_id = uuidv4()
         return this.services.Create(IndexDto)
     }
 

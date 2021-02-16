@@ -28,7 +28,7 @@ export class ConfigUserController {
 
     @Post()
     create(@Body() IndexDto:ConfigUsersDto):Promise<configUsers>{
-        IndexDto.unique_id = 'Config:' + uuidv4()
+        IndexDto.unique_id = uuidv4()
         return this.services.Create(IndexDto)
     }
 

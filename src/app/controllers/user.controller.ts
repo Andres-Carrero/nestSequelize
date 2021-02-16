@@ -30,7 +30,7 @@ export class UserController {
 
     @Post()
     create(@Body() UserDto:UsersDto):Promise<users>{
-        UserDto.unique_id = 'User:' + uuidv4() 
+        UserDto.unique_id = uuidv4() 
         return this.services.CreateUsers(UserDto)
     }
 

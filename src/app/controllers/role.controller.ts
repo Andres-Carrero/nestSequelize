@@ -28,7 +28,7 @@ export class RoleController {
 
     @Post()
     create(@Body() IndexDto:RoleDto):Promise<roles>{
-        IndexDto.unique_id = 'Role:' + uuidv4()
+        IndexDto.unique_id = uuidv4()
         return this.services.Create(IndexDto)
     }
 

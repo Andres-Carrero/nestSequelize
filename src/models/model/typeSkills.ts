@@ -13,15 +13,15 @@ import {
 } from 'sequelize-typescript';
 import { complement } from './complement'
 import { businessUnit } from "./businessUnit";
-import { Process } from "./process";
 import { professionals } from './professionals';
+import { professionalSkill } from "./relations/professionalSkill";
 
 
 @Table({
-    tableName: 'typeIdentiDoc',
+    tableName: 'TypeSkill',
     timestamps: true
 })
-export class typeIdentificationDocument extends Model<typeIdentificationDocument, complement> {
+export class TypeSkills extends Model<TypeSkills, complement> {
 
     @AllowNull(false)
     @Column({type: DataType.STRING})
@@ -46,14 +46,13 @@ export class typeIdentificationDocument extends Model<typeIdentificationDocument
     @ForeignKey(() => businessUnit)
     @Column
     businessId: number;
-          
+      
     // @ts-ignore 
     @BelongsTo(() => businessUnit)
     business: businessUnit;
 
     //@ts-ignore
-    @HasMany(() => professionals)
-    professionals: professionals;
-
+    @BelongsToMany(() => professionals, () => professionalSkill)
+    professionals: professionals
         
 }

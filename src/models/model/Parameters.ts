@@ -13,15 +13,13 @@ import {
 } from 'sequelize-typescript';
 import { complement } from './complement'
 import { businessUnit } from "./businessUnit";
-import { Process } from "./process";
-import { professionals } from './professionals';
 
 
 @Table({
-    tableName: 'typeIdentiDoc',
+    tableName: 'Parameter',
     timestamps: true
 })
-export class typeIdentificationDocument extends Model<typeIdentificationDocument, complement> {
+export class Parameters extends Model<Parameters, complement> {
 
     @AllowNull(false)
     @Column({type: DataType.STRING})
@@ -29,7 +27,7 @@ export class typeIdentificationDocument extends Model<typeIdentificationDocument
 
     @AllowNull(false)
     @Column({type: DataType.STRING})
-    description: string;
+    value: string;
 
     @DeletedAt
     @Column({type: DataType.DATE})
@@ -46,14 +44,9 @@ export class typeIdentificationDocument extends Model<typeIdentificationDocument
     @ForeignKey(() => businessUnit)
     @Column
     businessId: number;
-          
+      
     // @ts-ignore 
     @BelongsTo(() => businessUnit)
     business: businessUnit;
-
-    //@ts-ignore
-    @HasMany(() => professionals)
-    professionals: professionals;
-
         
 }

@@ -1,13 +1,12 @@
-import { Controller, Delete, Get, Post, Put, Request, Param, Body } from '@nestjs/common';
-import { Process } from 'src/models/model/process';
+import { Controller, Get, Post, Put, Delete, Request, Body, Param } from '@nestjs/common';
+import { professionals } from 'src/models/model/professionals';
+import { professionalDto } from '../complements/dto/professional.dto';
+import { ProfessionalService } from '../services/professional.service';
 import { v4 as uuidv4 } from 'uuid';
-import { processDto } from '../complements/dto/process.dto';
-import { ProcessService } from '../services/process.service';
 
-
-@Controller('process')
-export class ProcessController {
-    constructor(private services: ProcessService){}
+@Controller('professional')
+export class ProfessionalController {
+    constructor(private services: ProfessionalService){}
 
 
     @Get()
@@ -22,27 +21,27 @@ export class ProcessController {
     
 
     @Get(':id')
-    findByUuid(@Param('id') id:number):Promise<Process[]>{
+    findByUuid(@Param('id') id:number):Promise<professionals[]>{
         return this.services.findById(id);
     }
   
 
     @Post()
-    create(@Body() IndexDto:processDto):Promise<Process>{
+    create(@Body() IndexDto:professionalDto):Promise<professionals>{
         IndexDto.unique_id = uuidv4()
         return this.services.Create(IndexDto)
     }
 
 
     @Put(':id')
-    Update(@Param('id') id:number, @Body() IndexDto:processDto):Promise<Process[]>{
+    Update(@Param('id') id:number, @Body() IndexDto:professionalDto):Promise<professionals[]>{
         IndexDto.updatedAt = new Date
         return this.services.Update(id, IndexDto)
     }
 
 
     @Delete(':id')
-    Delete(@Param('id') id:number, @Body() IndexDto:processDto):Promise<Process[]>{
+    Delete(@Param('id') id:number, @Body() IndexDto:professionalDto):Promise<professionals[]>{
         IndexDto.status = false
         IndexDto.deleteAt = new Date
         return this.services.delete(id, IndexDto)

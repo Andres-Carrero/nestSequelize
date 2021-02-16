@@ -1,17 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Contract } from "src/models/model/contract";
-import { PaginationOptionsInterface } from "src/app/complements/interface/paginator.interface";
-import { Process } from "src/models/model/process";
-import { businessUnit } from 'src/models/model/businessUnit';
-import { roles } from "src/models/model/role";
-
+import { City } from 'src/models/model/city';
+import { Departments } from 'src/models/model/departments';
+import { PaginationOptionsInterface } from '../complements/interface/paginator.interface';
+import { Country } from "src/models/model/country";
 
 @Injectable()
-export class ContractService {
+export class CityService {
     constructor(
-        @InjectModel(Contract)
-        private readonly Model: typeof Contract,
+        @InjectModel(City)
+        private readonly Model: typeof City,
     ){}
 
     async getAll(options: PaginationOptionsInterface): Promise<any>{
@@ -19,34 +17,34 @@ export class ContractService {
         limit: options.limits,
         offset: options.pages,
         //@ts-ignore
-        include: [{model: businessUnit, include: [roles]}]
+        include: [{model: Departments, include: [Country]  } ]
         });
  
       return {rows, count};
     }
           
-    async findById(id):Promise<Contract[]>{
+    async findById(id):Promise<City[]>{
         //@ts-ignore
-        const findid = await this.Model.findOne({where: {unique_id: id}, include: [{model: businessUnit, include: [roles]}]})
+        const findid = await this.Model.findOne({where: {unique_id: id}, include: [{model: Departments, include: [Country]  }   ]  })
         if (findid == null){return [id, 'no hay resultados']}
 
         return [findid]
     }
         
 
-    async Create(data):Promise<Contract>{
+    async Create(data):Promise<City>{
         const NewData = await this.Model.create(data);
         return NewData
     }
       
     
-    async Update(id, data ):Promise<Contract[]>{
+    async Update(id, data ):Promise<City[]>{
         const update = await this.Model.update(data, {where: {unique_id: id}})
         return data
     }
     
         
-    async delete(id, data):Promise<Contract[]>{
+    async delete(id, data):Promise<City[]>{
         const eliminate = await this.Model.update(data, {where: {unique_id: id}})
         return [id, data]
     }

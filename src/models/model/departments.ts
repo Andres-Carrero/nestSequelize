@@ -12,24 +12,19 @@ import {
     HasMany
 } from 'sequelize-typescript';
 import { complement } from './complement'
-import { businessUnit } from "./businessUnit";
-import { Process } from "./process";
-import { professionals } from './professionals';
+import { Country } from "./country";
+import { City } from "./city";
 
 
 @Table({
-    tableName: 'typeIdentiDoc',
+    tableName: 'Department',
     timestamps: true
 })
-export class typeIdentificationDocument extends Model<typeIdentificationDocument, complement> {
+export class Departments extends Model<Departments, complement> {
 
     @AllowNull(false)
     @Column({type: DataType.STRING})
     name: string;
-
-    @AllowNull(false)
-    @Column({type: DataType.STRING})
-    description: string;
 
     @DeletedAt
     @Column({type: DataType.DATE})
@@ -43,17 +38,16 @@ export class typeIdentificationDocument extends Model<typeIdentificationDocument
     unique_id: string 
 
     // @ts-ignore 
-    @ForeignKey(() => businessUnit)
+    @ForeignKey(() => Country)
     @Column
-    businessId: number;
-          
+    countryId: number;
+      
     // @ts-ignore 
-    @BelongsTo(() => businessUnit)
-    business: businessUnit;
+    @BelongsTo(() => Country)
+    Country: Country;
 
-    //@ts-ignore
-    @HasMany(() => professionals)
-    professionals: professionals;
-
+    // @ts-ignore 
+    @HasMany(() => City)
+    Countrys: City;
         
 }

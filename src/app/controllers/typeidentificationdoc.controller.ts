@@ -28,7 +28,7 @@ export class TypeIdentificationDocController {
 
     @Post()
     create(@Body() IndexDto:typeIdentiDocumentDto):Promise<typeIdentificationDocument>{
-        IndexDto.unique_id = 'TypeDoc:' + uuidv4()
+        IndexDto.unique_id =  uuidv4()
         return this.services.Create(IndexDto)
     }
 

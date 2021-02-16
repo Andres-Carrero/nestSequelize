@@ -12,10 +12,21 @@ import { ContractModule } from './modules/contract.module';
 import { ProcessModule } from './modules/process.module';
 import { TypesServicesModule } from './modules/typesServices.module';
 import { TypeIdentificationDocModule } from './modules/typeIdentificationDoc.module';
+import { UpzModule } from './modules/upz.module';
+import { TypeSkillsModule } from './modules/typeskills.module';
+import { ParametersModule } from './modules/parameters.module';
+import { DepartmentModule } from './modules/department.module';
+import { CommuneModule } from './modules/commune.module';
+import { CityModule } from './modules/city.module';
+import { CountryModule } from "./modules/country.module";
+import { ProfessionalModule } from './modules/professional.module';
+import { ProfessionalSkillModule } from './modules/relations/professionalskill.module';
 
 
 @Module({
     imports: [
+        ProfessionalSkillModule,
+        ProfessionalModule,
         TypeIdentificationDocModule,
         TypesServicesModule,
         UserModule,
@@ -28,7 +39,15 @@ import { TypeIdentificationDocModule } from './modules/typeIdentificationDoc.mod
         PermissionModule,
         ContractModule,
         BusinessUnitModule,
-        ProcessModule
+        ProcessModule,
+        UpzModule,
+        TypeSkillsModule,
+        ParametersModule,
+        DepartmentModule,
+        ContractModule,
+        CommuneModule,
+        CityModule,
+        CountryModule
     ],
     controllers: [],
     providers: [],

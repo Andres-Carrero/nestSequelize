@@ -28,7 +28,7 @@ export class ContractController {
 
     @Post()
     create(@Body() IndexDto:contractDto):Promise<Contract>{
-        IndexDto.unique_id = 'Contract:' + uuidv4()
+        IndexDto.unique_id = uuidv4()
         return this.services.Create(IndexDto)
     }
 

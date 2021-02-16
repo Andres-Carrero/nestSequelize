@@ -19,6 +19,10 @@ import { businessUser } from './relations/businessUser';
 import { Contract } from "./contract";
 import { typeServices } from './typesServices';
 import { roles } from './role';
+import { TypeSkills } from './typeSkills';
+import { Parameters } from "./Parameters";
+import { Country } from "./country";
+import { professionals } from './professionals';
 
 @Table({
     tableName: 'businessUnit',
@@ -79,6 +83,20 @@ export class businessUnit extends Model<businessUnit, complement> {
     @BelongsTo(() => roles)
     role: roles;
 
+    // @ts-ignore 
+    @HasMany(() => TypeSkills)
+    TypeSkills: TypeSkills;
 
+    // @ts-ignore 
+    @HasMany(() => Parameters)
+    Parameters: Parameters;
+
+    // @ts-ignore 
+    @HasMany(() => Country)
+    Countrys: Country;
+
+    // @ts-ignore 
+    @HasMany(() => professionals)
+    professionals: professionals;
     
 }

@@ -1,13 +1,13 @@
-import { Controller, Delete, Get, Post, Put, Request, Param, Body } from '@nestjs/common';
-import { Process } from 'src/models/model/process';
+import { Controller, Get, Put, Delete, Post, Param, Body, Request } from '@nestjs/common';
+import { Commune } from 'src/models/model/commune';
+import { communeDto } from '../complements/dto/commune.dto';
+import { CommuneService } from '../services/commune.service';
 import { v4 as uuidv4 } from 'uuid';
-import { processDto } from '../complements/dto/process.dto';
-import { ProcessService } from '../services/process.service';
 
 
-@Controller('process')
-export class ProcessController {
-    constructor(private services: ProcessService){}
+@Controller('commune')
+export class CommuneController {
+    constructor(private services: CommuneService){}
 
 
     @Get()
@@ -22,27 +22,27 @@ export class ProcessController {
     
 
     @Get(':id')
-    findByUuid(@Param('id') id:number):Promise<Process[]>{
+    findByUuid(@Param('id') id:number):Promise<Commune[]>{
         return this.services.findById(id);
     }
   
 
     @Post()
-    create(@Body() IndexDto:processDto):Promise<Process>{
+    create(@Body() IndexDto:communeDto):Promise<Commune>{
         IndexDto.unique_id = uuidv4()
         return this.services.Create(IndexDto)
     }
 
 
     @Put(':id')
-    Update(@Param('id') id:number, @Body() IndexDto:processDto):Promise<Process[]>{
+    Update(@Param('id') id:number, @Body() IndexDto:communeDto):Promise<Commune[]>{
         IndexDto.updatedAt = new Date
         return this.services.Update(id, IndexDto)
     }
 
 
     @Delete(':id')
-    Delete(@Param('id') id:number, @Body() IndexDto:processDto):Promise<Process[]>{
+    Delete(@Param('id') id:number, @Body() IndexDto:communeDto):Promise<Commune[]>{
         IndexDto.status = false
         IndexDto.deleteAt = new Date
         return this.services.delete(id, IndexDto)
