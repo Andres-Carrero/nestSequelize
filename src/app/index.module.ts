@@ -21,10 +21,17 @@ import { CityModule } from './modules/city.module';
 import { CountryModule } from "./modules/country.module";
 import { ProfessionalModule } from './modules/professional.module';
 import { ProfessionalSkillModule } from './modules/relations/professionalskill.module';
+import { TypeProfessionalModule } from './modules/typeprofessional.module';
+import { CrewProfessionalModule } from "./modules/relations/crewprofessional.module";
+import { CrewModule } from './modules/crew.module';
 
 
 @Module({
     imports: [
+        RoleModule,
+        CrewModule,
+        CrewProfessionalModule,
+        TypeProfessionalModule,
         ProfessionalSkillModule,
         ProfessionalModule,
         TypeIdentificationDocModule,

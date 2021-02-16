@@ -14,6 +14,10 @@ extends complement {
     direction: string;
     businessId: number
     typeDocumentId: number
+    if_Supervisor: boolean
+    if_senior: boolean
+    if_junior: boolean
+    typeProfessionaId: number
     deleteAt: Date
     status: boolean
     unique_id: string 

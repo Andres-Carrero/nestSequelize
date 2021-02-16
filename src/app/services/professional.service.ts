@@ -6,6 +6,8 @@ import { businessUnit } from "src/models/model/businessUnit";
 import { TypeSkills } from "src/models/model/typeSkills";
 import { roles } from "src/models/model/role";
 import { typeIdentificationDocument } from "src/models/model/type-Identification-Document";
+import { TypeProfessional } from 'src/models/model/typeProfessional';
+import { Crew } from 'src/models/model/crew';
 
 @Injectable()
 export class ProfessionalService {
@@ -20,7 +22,7 @@ export class ProfessionalService {
         limit: options.limits,
         offset: options.pages,
         //@ts-ignore
-        include: [{model:typeIdentificationDocument},{model: businessUnit, include: [roles]},{model:TypeSkills} ]
+        include: [{model:typeIdentificationDocument},{model: TypeProfessional},{model: businessUnit, include: [roles]},{model: Crew},{model:TypeSkills} ]
         });
  
       return {rows, count};
@@ -30,6 +32,8 @@ export class ProfessionalService {
         //@ts-ignore
         const findid = await this.Model.findOne({where: {unique_id: id}, 
             include: [  {model:typeIdentificationDocument},
+                        {model: Crew},
+                        {model: TypeProfessional},
                         {model: businessUnit, include: [roles]},
                         {model:TypeSkills} 
                     ]

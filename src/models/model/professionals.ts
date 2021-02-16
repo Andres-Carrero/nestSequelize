@@ -14,7 +14,9 @@ import { businessUnit } from "./businessUnit";
 import { typeIdentificationDocument } from './type-Identification-Document';
 import { TypeSkills } from './typeSkills';
 import { professionalSkill } from "./relations/professionalSkill";
-
+import { Crew } from './crew';
+import { crewProfessional } from "./relations/crewProfessional";
+import { TypeProfessional } from "./typeProfessional";
 
 @Table({
     tableName: 'professional',
@@ -54,6 +56,15 @@ export class professionals extends Model<professionals, complement>{
     @Column({type: DataType.DATE})
     deleteAt: Date
 
+    @Column({type: DataType.BOOLEAN})
+    if_Supervisor: boolean
+
+    @Column({type: DataType.BOOLEAN})
+    if_senior: boolean
+
+    @Column({type: DataType.BOOLEAN})
+    if_junior: boolean
+
     @Column({type: DataType.BOOLEAN, defaultValue: true })
     status: boolean
 
@@ -82,6 +93,20 @@ export class professionals extends Model<professionals, complement>{
     //@ts-ignore
     @BelongsToMany(() => TypeSkills, () => professionalSkill)
     TypeSkills: TypeSkills
+
+    //@ts-ignore
+    @BelongsToMany(() => Crew, () => crewProfessional)
+    Crew: Crew
+
+    // @ts-ignore 
+    @ForeignKey(() => TypeProfessional)
+    @Column
+    typeProfessionaId: number;
+          
+    // @ts-ignore 
+    @BelongsTo(() => TypeProfessional)
+    typeProfessional: TypeProfessional;
+    
 
 
     
