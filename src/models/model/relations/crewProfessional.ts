@@ -28,4 +28,13 @@ export class crewProfessional extends Model {
     @Column
     crewId: number;
 
+    @Column({type: DataType.BOOLEAN})
+    is_Supervisor: boolean
+
+    @Column({type: DataType.BOOLEAN})
+    is_senior: boolean
+
+    @Column({type: DataType.BOOLEAN})
+    is_junior: boolean
+
 }

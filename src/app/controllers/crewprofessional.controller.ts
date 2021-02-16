@@ -1,4 +1,5 @@
 import { Controller, Post, Get, Param, Delete, Put, Body, ParseIntPipe, Request } from '@nestjs/common';
+import { crewProfessionalDto } from '../complements/dto/crewProfessional.dto';
 import { CrewProfessionalService } from '../services/crewprofessional.service';
 
 @Controller('crewProfessional')
@@ -10,8 +11,9 @@ export class CrewProfessionalController {
     async Create(
       @Param('professionId', ParseIntPipe) professionId: number,
       @Param('crewId', ParseIntPipe) crewId: number,
+      @Body() data: crewProfessionalDto
     ){    
-      return this.services.Create(professionId, crewId);
+      return this.services.Create(professionId, crewId, data);
     }
 
 
@@ -27,8 +29,9 @@ export class CrewProfessionalController {
     async Update(
       @Param('professionId', ParseIntPipe) professionId: number,
       @Param('crewId', ParseIntPipe) crewId: number,
+      @Body() data: crewProfessionalDto
     ){ 
-      return this.services.update(professionId, crewId);
+      return this.services.update(professionId, crewId, data);
     }
 
 

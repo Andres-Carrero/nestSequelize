@@ -14,9 +14,9 @@ extends complement {
     direction: string;
     businessId: number
     typeDocumentId: number
-    if_Supervisor: boolean
-    if_senior: boolean
-    if_junior: boolean
+    is_Supervisor: boolean
+    is_senior: boolean
+    is_junior: boolean
     typeProfessionaId: number
     deleteAt: Date
     status: boolean

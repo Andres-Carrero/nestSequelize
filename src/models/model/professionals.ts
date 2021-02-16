@@ -57,13 +57,13 @@ export class professionals extends Model<professionals, complement>{
     deleteAt: Date
 
     @Column({type: DataType.BOOLEAN})
-    if_Supervisor: boolean
+    is_Supervisor: boolean
 
     @Column({type: DataType.BOOLEAN})
-    if_senior: boolean
+    is_senior: boolean
 
     @Column({type: DataType.BOOLEAN})
-    if_junior: boolean
+    is_junior: boolean
 
     @Column({type: DataType.BOOLEAN, defaultValue: true })
     status: boolean

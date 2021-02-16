@@ -37,7 +37,7 @@ export class CrewProfessionalService {
     }
   
   
-    async Create(professionId, crewId){
+    async Create(professionId, crewId, data){
       const finduser = await this.professionalsModel.findOne({where:{id: professionId} }  )
       if (finduser == null || !finduser ){return [professionId, 'no hay resultados']}
 
@@ -46,14 +46,17 @@ export class CrewProfessionalService {
 
       const newUserRole = await this.crewProfessionalModel.create({
         professionId: finduser.id,
-        crewId: findbusiness.id
+        crewId: findbusiness.id,
+        is_Supervisor: data.is_Supervisor,
+        is_senior: data.is_senior,
+        is_junior: data.is_junior
       });
 
       return [newUserRole, finduser, findbusiness]
     }
 
 
-    async update(professionId, crewId){
+    async update(professionId, crewId, data){
       const finduser = await this.professionalsModel.findOne({where:{id: professionId} })
       if (finduser == null || !finduser ){return [professionId, 'no hay resultados']}
         console.log(finduser);
@@ -67,7 +70,10 @@ export class CrewProfessionalService {
       await this.crewProfessionalModel.destroy({where: {professionId: finduser.id}})
       const newUserbussiness = await this.crewProfessionalModel.create({
         professionId: finduser.id,
-        crewId: findbusiness.id
+        crewId: findbusiness.id,
+        is_Supervisor: data.is_Supervisor,
+        is_senior: data.is_senior,
+        is_junior: data.is_junior
       });
      
       return newUserbussiness

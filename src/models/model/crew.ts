@@ -30,6 +30,8 @@ export class Crew extends Model<Crew, complement> {
     @Column({type: DataType.STRING})
     description: string;
 
+
+
     @DeletedAt
     @Column({type: DataType.DATE})
     deleteAt: Date
