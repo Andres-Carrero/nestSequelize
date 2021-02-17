@@ -2,7 +2,7 @@ import { TypeIdentificationDocController } from './../controllers/typeidentifica
 import { TypeIdentificationDocService } from './../services/typeidentificationdoc.service';
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { typeIdentificationDocument } from 'src/models/model/type-Identification-Document';
+import { typeIdentificationDocument } from 'src/models/model/typeDocIdentification';
 import { typeServices } from 'src/models/model/typesServices';
 
 @Module({

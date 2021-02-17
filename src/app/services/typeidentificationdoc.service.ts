@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { businessUnit } from 'src/models/model/businessUnit';
 import { roles } from 'src/models/model/role';
-import { typeIdentificationDocument } from 'src/models/model/type-Identification-Document';
+import { typeIdentificationDocument } from 'src/models/model/typeDocIdentification';
 import { PaginationOptionsInterface } from '../complements/interface/paginator.interface';
 
 @Injectable()

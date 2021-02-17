@@ -5,7 +5,7 @@ import { PaginationOptionsInterface } from '../complements/interface/paginator.i
 import { businessUnit } from "src/models/model/businessUnit";
 import { TypeSkills } from "src/models/model/typeSkills";
 import { roles } from "src/models/model/role";
-import { typeIdentificationDocument } from "src/models/model/type-Identification-Document";
+import { typeIdentificationDocument } from "src/models/model/typeDocIdentification";
 import { TypeProfessional } from 'src/models/model/typeProfessional';
 import { Crew } from 'src/models/model/crew';
 

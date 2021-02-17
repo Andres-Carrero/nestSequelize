@@ -1,5 +1,5 @@
 import { Controller, Request, Get, Post, Put, Delete, Param, Body} from '@nestjs/common';
-import { typeIdentificationDocument } from 'src/models/model/type-Identification-Document';
+import { typeIdentificationDocument } from 'src/models/model/typeDocIdentification';
 import { typeIdentiDocumentDto } from '../complements/dto/typeIdentiDoc.dto';
 import { TypeIdentificationDocService } from '../services/typeidentificationdoc.service';
 import { v4 as uuidv4 } from 'uuid';

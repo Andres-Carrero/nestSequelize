@@ -40,6 +40,7 @@ export class Parameters extends Model<Parameters, complement> {
     @Column({type: DataType.STRING})
     unique_id: string 
 
+    @AllowNull(false)
     // @ts-ignore 
     @ForeignKey(() => businessUnit)
     @Column

@@ -7,3 +7,9 @@ extends complement {
     is_senior: boolean
     is_junior: boolean
 }
+
+export class docVehiclesDto 
+extends complement {
+    expirationDate: string
+
+}

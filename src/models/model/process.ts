@@ -12,6 +12,8 @@ import {
 } from 'sequelize-typescript';
 import { complement } from './complement'
 import { Contract } from "./contract";
+import { typeDocVehicles } from './typeDocVehicles';
+import { Vehicles } from './vehicles';
 
 
 @Table({
@@ -45,5 +47,11 @@ export class Process extends Model<Process, complement> {
     @BelongsTo(() => Contract)
     contract: Contract;
 
-    
+    // @ts-ignore 
+    @HasMany(() => Vehicles)
+    Vehicles: Vehicles;
+
+    // @ts-ignore 
+    @HasMany(() => typeDocVehicles)
+    typeDocVehicles: typeDocVehicles;
 }

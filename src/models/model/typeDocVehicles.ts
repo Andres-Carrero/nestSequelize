@@ -14,13 +14,16 @@ import {
 import { complement } from './complement'
 import { businessUnit } from "./businessUnit";
 import { Process } from "./process";
+import { Vehicles } from './vehicles';
+import { DocVehicles } from './relations/docVehicle';
+import { Contract } from './contract';
 
 
 @Table({
-    tableName: 'typeServices',
+    tableName: 'typeDocVehicle',
     timestamps: true
 })
-export class typeServices extends Model<typeServices, complement> {
+export class typeDocVehicles extends Model<typeDocVehicles, complement> {
 
     @AllowNull(false)
     @Column({type: DataType.STRING})
@@ -34,6 +37,7 @@ export class typeServices extends Model<typeServices, complement> {
     @Column({type: DataType.DATE})
     deleteAt: Date
 
+    @AllowNull(false)
     @Column({type: DataType.BOOLEAN, defaultValue: true })
     status: boolean
 
@@ -46,10 +50,33 @@ export class typeServices extends Model<typeServices, complement> {
     @ForeignKey(() => businessUnit)
     @Column
     businessId: number;
-          
+      
     // @ts-ignore 
     @BelongsTo(() => businessUnit)
     business: businessUnit;
 
-        
+    //@ts-ignore
+    @BelongsToMany(() => Vehicles, () => DocVehicles)
+    vehicles: Vehicles
+
+    @AllowNull(true)
+    // @ts-ignore 
+    @ForeignKey(() => Contract)
+    @Column
+    contractId: number;
+      
+    // @ts-ignore 
+    @BelongsTo(() => Contract)
+    contract: Contract;
+
+    @AllowNull(true)
+    // @ts-ignore 
+    @ForeignKey(() => Process)
+    @Column
+    processId: number;
+          
+    // @ts-ignore 
+    @BelongsTo(() => Process)
+    process: Process; 
+
 }

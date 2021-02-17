@@ -23,6 +23,8 @@ import { TypeSkills } from './typeSkills';
 import { Parameters } from "./Parameters";
 import { Country } from "./country";
 import { professionals } from './professionals';
+import { Vehicles } from './vehicles';
+import { typeDocVehicles } from './typeDocVehicles';
 
 @Table({
     tableName: 'businessUnit',
@@ -98,5 +100,13 @@ export class businessUnit extends Model<businessUnit, complement> {
     // @ts-ignore 
     @HasMany(() => professionals)
     professionals: professionals;
+
+    // @ts-ignore 
+    @HasMany(() => typeDocVehicles)
+    typeDocVehicles: typeDocVehicles;
+
+    // @ts-ignore 
+    @HasMany(() => Vehicles)
+    Vehicles: Vehicles;
     
 }

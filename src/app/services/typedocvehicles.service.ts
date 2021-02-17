@@ -1,16 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { TypeSkills } from 'src/models/model/typeSkills';
+import { businessUnit } from 'src/models/model/businessUnit';
+import { typeDocVehicles } from 'src/models/model/typeDocVehicles';
+import { Vehicles } from 'src/models/model/vehicles';
 import { PaginationOptionsInterface } from '../complements/interface/paginator.interface';
-import { businessUnit } from "src/models/model/businessUnit";
-import { roles } from "src/models/model/role";
-import { typeIdentificationDocument } from 'src/models/model/typeDocIdentification';
 
 @Injectable()
-export class TypeskillsService {
+export class TypedocvehiclesService {
     constructor(
-        @InjectModel(TypeSkills)
-        private readonly Model: typeof TypeSkills,
+        @InjectModel(typeDocVehicles)
+        private readonly Model: typeof typeDocVehicles,
     ){}
 
     async getAll(options: PaginationOptionsInterface): Promise<any>{
@@ -18,36 +17,36 @@ export class TypeskillsService {
         limit: options.limits,
         offset: options.pages,
         //@ts-ignore
-        include: [{model: businessUnit, include: [roles]}],
+        include: [businessUnit, Vehicles]
         });
  
       return {rows, count};
     }
           
-    async findById(id):Promise<TypeSkills[]>{
+    async findById(id):Promise<typeDocVehicles[]>{
         //@ts-ignore
-        const findid = await this.Model.findOne({where: {unique_id: id}, include: [{model: businessUnit, include: [roles]},{model: typeIdentificationDocument}] })
+        const findid = await this.Model.findOne({where: {unique_id: id}, include: [businessUnit, Vehicles]})
         if (findid == null){return [id, 'no hay resultados']}
 
         return [findid]
     }
         
 
-    async Create(data):Promise<TypeSkills>{
+    async Create(data):Promise<typeDocVehicles>{
         const NewData = await this.Model.create(data);
         return NewData
     }
       
     
-    async Update(id, data ):Promise<TypeSkills[]>{
+    async Update(id, data ):Promise<typeDocVehicles[]>{
         const update = await this.Model.update(data, {where: {unique_id: id}})
         return data
     }
     
         
-    async delete(id, data):Promise<TypeSkills[]>{
+    async delete(id, data):Promise<typeDocVehicles[]>{
         const eliminate = await this.Model.update(data, {where: {unique_id: id}})
-        return [id, data]
+        return data
     }
 }
 

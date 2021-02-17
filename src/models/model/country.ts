@@ -41,6 +41,7 @@ export class Country extends Model<Country, complement> {
     @Column({type: DataType.STRING})
     unique_id: string 
 
+    @AllowNull(false)
     // @ts-ignore 
     @ForeignKey(() => businessUnit)
     @Column

@@ -11,7 +11,7 @@ import {
     BelongsTo,} from 'sequelize-typescript';
 import { complement } from "./complement";
 import { businessUnit } from "./businessUnit";
-import { typeIdentificationDocument } from './type-Identification-Document';
+import { typeIdentificationDocument } from './typeDocIdentification';
 import { TypeSkills } from './typeSkills';
 import { professionalSkill } from "./relations/professionalSkill";
 import { Crew } from './crew';
@@ -72,6 +72,7 @@ export class professionals extends Model<professionals, complement>{
     @Column({type: DataType.STRING})
     unique_id: string 
 
+    @AllowNull(false)
     // @ts-ignore 
     @ForeignKey(() => businessUnit)
     @Column

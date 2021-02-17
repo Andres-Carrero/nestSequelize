@@ -42,6 +42,7 @@ export class typeIdentificationDocument extends Model<typeIdentificationDocument
     @Column({type: DataType.STRING})
     unique_id: string 
 
+    @AllowNull(false)
     // @ts-ignore 
     @ForeignKey(() => businessUnit)
     @Column

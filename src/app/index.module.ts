@@ -24,10 +24,16 @@ import { ProfessionalSkillModule } from './modules/relations/professionalskill.m
 import { TypeProfessionalModule } from './modules/typeprofessional.module';
 import { CrewProfessionalModule } from "./modules/relations/crewprofessional.module";
 import { CrewModule } from './modules/crew.module';
+import { VehiclesModule } from './modules/vehicles.module';
+import { TypeDocVehiclesModule } from './modules/typedocvehicles.module';
+import { DocVehicleModule } from './modules/relations/docvehicle.module';
 
 
 @Module({
     imports: [
+        DocVehicleModule,
+        VehiclesModule,
+        TypeDocVehiclesModule,
         RoleModule,
         CrewModule,
         CrewProfessionalModule,

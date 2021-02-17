@@ -1,5 +1,5 @@
 import { Controller, Post, Get, Param, Delete, Put, Body, ParseIntPipe, Request } from '@nestjs/common';
-import { crewProfessionalDto } from '../complements/dto/crewProfessional.dto';
+import { crewProfessionalDto } from '../complements/dto/relations.dto';
 import { CrewProfessionalService } from '../services/crewprofessional.service';
 
 @Controller('crewProfessional')

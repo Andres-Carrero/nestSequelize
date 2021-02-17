@@ -33,6 +33,7 @@ export class TypeProfessional extends Model<TypeProfessional, complement> {
     @Column({type: DataType.DATE})
     deleteAt: Date
 
+    @AllowNull(false)
     @Column({type: DataType.BOOLEAN, defaultValue: true })
     status: boolean
 

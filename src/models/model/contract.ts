@@ -14,6 +14,8 @@ import {
 import { complement } from './complement'
 import { businessUnit } from "./businessUnit";
 import { Process } from "./process";
+import { typeDocVehicles } from './typeDocVehicles';
+import { Vehicles } from './vehicles';
 
 
 @Table({
@@ -41,6 +43,7 @@ export class Contract extends Model<Contract, complement> {
     @Column({type: DataType.STRING})
     unique_id: string 
 
+    @AllowNull(false)
     // @ts-ignore 
     @ForeignKey(() => businessUnit)
     @Column
@@ -54,5 +57,11 @@ export class Contract extends Model<Contract, complement> {
     @HasMany(() => Process)
     process: Process;
 
-        
+    // @ts-ignore 
+    @HasMany(() => typeDocVehicles)
+    typeDocVehicles: typeDocVehicles;
+
+    // @ts-ignore 
+    @HasMany(() => Vehicles)
+    Vehicles: Vehicles;
 }
