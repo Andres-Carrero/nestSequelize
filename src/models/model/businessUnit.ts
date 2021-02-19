@@ -25,7 +25,7 @@ import { Country } from "./country";
 import { professionals } from './professionals';
 import { Vehicles } from './vehicles';
 import { typeDocVehicles } from './typeDocVehicles';
-
+import { WorkflowHead } from "./workflowHead";
 @Table({
     tableName: 'businessUnit',
     timestamps: true
@@ -108,5 +108,9 @@ export class businessUnit extends Model<businessUnit, complement> {
     // @ts-ignore 
     @HasMany(() => Vehicles)
     Vehicles: Vehicles;
+
+    // @ts-ignore 
+    @HasMany(() => WorkflowHead)
+    workflowHead: WorkflowHead;
     
 }

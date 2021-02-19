@@ -1,4 +1,4 @@
-import { BusinessUserController } from './../../controllers/businessuser.controller';
+import { BusinessUserController } from '../../controllers/businessuser.controller';
 import { BusinessUserService } from './../../services/businessuser.service';
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';

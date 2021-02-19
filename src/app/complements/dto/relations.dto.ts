@@ -11,5 +11,10 @@ extends complement {
 export class docVehiclesDto 
 extends complement {
     expirationDate: string
+}
 
+export class UserRoleDto
+extends complement {
+    userId: number
+    roleId: number
 }

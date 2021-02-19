@@ -1,3 +1,6 @@
+import { WorkflowTypeActionService } from './app/services/workflowtypeaction.service';
+import { WorkflowTypeActionController } from './app/controllers/workflowtypeaction.controller';
+
 import { IndexModule } from './app/index.module';
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -23,7 +26,9 @@ import { AppService } from './app.service';
 
 
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [
+    AppController],
+  providers: [
+    AppService],
 })
 export class AppModule { }

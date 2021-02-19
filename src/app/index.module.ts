@@ -27,10 +27,12 @@ import { CrewModule } from './modules/crew.module';
 import { VehiclesModule } from './modules/vehicles.module';
 import { TypeDocVehiclesModule } from './modules/typedocvehicles.module';
 import { DocVehicleModule } from './modules/relations/docvehicle.module';
+import { WorkflowModule } from './modules/workflow.module';
 
 
 @Module({
     imports: [
+        WorkflowModule,
         DocVehicleModule,
         VehiclesModule,
         TypeDocVehiclesModule,
