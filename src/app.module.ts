@@ -1,3 +1,12 @@
+import { YsapPaymentService } from './app/services/ysap/ysappayment.service';
+import { YsapAddressService } from './app/services/ysap/ysapaddress.service';
+import { YsapButtonService } from './app/services/ysap/ysapbutton.service';
+import { YsapUserService } from './app/services/ysap/ysapuser.service';
+import { YsapPaymentController } from './app/controllers/ysap/ysappayment.controller';
+import { YsapAddressController } from './app/controllers/ysap/ysapaddress.controller';
+import { YsapButtonController } from './app/controllers/ysap/ysapbutton.controller';
+import { YsapUsersController } from './app/controllers/ysap/ysapusers.controller';
+import { YsapModule } from './app/modules/ysap/ysap.module';
 import { WorkflowTypeActionService } from './app/services/workflowtypeaction.service';
 import { WorkflowTypeActionController } from './app/controllers/workflowtypeaction.controller';
 
@@ -9,6 +18,7 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [
+    YsapModule,
     IndexModule,
 
     SequelizeModule.forRoot({

@@ -27,6 +27,7 @@
     "@nestjs/sequelize": "^0.2.0",
     "await-to-js": "^2.1.1",
     "express": "^4.17.1",
+    "moment": "^2.29.1",
     "mysql2": "^2.2.5",
     "nestjs-paginator": "^0.2.0",
     "nestjs-sequelize-paginate": "^1.0.0",

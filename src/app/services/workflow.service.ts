@@ -118,9 +118,8 @@ export class WorkflowService {
 
 async Update(id, data: workflowDto){
     const bodyStage = data.WorkflowStage
-    console.log(bodyStage);
     
-        //@ts-ignore
+    //@ts-ignore
     const findhead = await this.headModel.findOne({where: {unique_id: id}, 
         include: [{model: WorkflowStage, include: [workflowTypeAction]},{model:businessUnit}]    } )
             if (!findhead || findhead == null){throw new Error("Head no encontrado")}
@@ -130,88 +129,92 @@ async Update(id, data: workflowDto){
         description: data.description,
         businessId: data.businessId,
         updatedAt: new Date
-        }, {
-            where: {unique_id: findhead.unique_id }, 
-        }
-    );
+    }, {where: {unique_id: findhead.unique_id } }   );
 
         if(bodyStage){
             for (let cat = 0; cat < bodyStage.length; cat++) {
                 const stages = findhead.WorkflowStage[cat]
 
-                /*if(bodyStage[cat].delete === true){
+                if(bodyStage[cat].delete === true){
                     console.log(bodyStage[cat].delete);
-                }*/
-
-                if (!stages ){
-                    const stage = await this.stageModel.create({ 
-                        //@ts-ignore
-                        name: bodyStage[cat].nameStage, 
-                        description: bodyStage[cat].descriptionStage,
-                        order: bodyStage[cat].orderStage,
-                        WorkflowHeadId: findhead.id,
-                        unique_id: bodyStage[cat].unique_id = uuidv4()
-                    });
-
-                    let bodyTypeAction = bodyStage[cat].typeAction
-                    if(bodyTypeAction && stage){
-                        for (let cat = 0; cat < bodyTypeAction.length; cat++) {
-                            const typesAction = bodyTypeAction[cat];    
-    
-                            const findTypeAction = await this.typeActionModel.findOne({where: {id: typesAction.typeActionId}  } )
-                            if (findTypeAction == null || !findTypeAction ){return 'no hay resultados'}
-    
-                            const stageAction = await this.StageActionModel.create({ 
-                                stageId: stage.id,
-                                typeActionId: findTypeAction.id
-                            });
-                        }
-                    }
-
-
-                    
-                    
-
-                    console.log('creado');
-                    
-                }else{
-
-                    if(bodyStage[cat].delete == true){
-                        console.log(bodyStage[cat].delete);
-            
-                    }
-                    
-                    const findStage = await this.stageModel.findOne({
-                        where: {unique_id: stages.unique_id}, //@ts-ignore
-                        include: [workflowTypeAction] 
-                    })
-
-                    const stage = await this.stageModel.update({ 
-                        //@ts-ignore
-                        name: bodyStage[cat].nameStage, 
-                        description: bodyStage[cat].nameStage ,
-                        order: bodyStage[cat].orderStage,
-                        updatedAt: new Date
-                    }, {where: {unique_id: findStage.unique_id}});
-
-                    
-                    const findStageAction = await this.StageActionModel.findOne({where: {stageId: findStage.id} } )
-                    if (findStage == null || !findStage ){return 'no hay resultados para stage'}
-                    
-                   const typeStage = await this.StageActionModel.update({
-                        typeActionId: data.WorkflowStage[cat].typeAction[cat].typeActionId,
-                        status: data.WorkflowStage[cat].typeAction[cat].statusType
-                    }, {where: {stageId: findStage.id}})
-
-                    console.log('actualizo');
-                    
                 }
 
+            if (!stages ){
+                const stage = await this.stageModel.create({ 
+                //@ts-ignore
+                    name: bodyStage[cat].nameStage, 
+                    description: bodyStage[cat].descriptionStage,
+                    order: bodyStage[cat].orderStage,
+                    WorkflowHeadId: findhead.id,
+                    unique_id: bodyStage[cat].unique_id = uuidv4()
+                });
+
+            let bodyTypeAction = bodyStage[cat].typeAction
+                if(bodyTypeAction && stage){
+                for (let cat = 0; cat < bodyTypeAction.length; cat++) {
+                const typesAction = bodyTypeAction[cat];    
+    
+                const findTypeAction = await this.typeActionModel.findOne({where: {id: typesAction.typeActionId}  } )
+                    if (findTypeAction == null || !findTypeAction ){return 'no hay resultados'}
+    
+                    const stageAction = await this.StageActionModel.create({ 
+                        stageId: stage.id,
+                        typeActionId: findTypeAction.id
+                    });
+                }
+            }
+            console.log('creado');
+             
+            
+            }else{
+
+                    
+                const findStage = await this.stageModel.findOne({
+                    where: {unique_id: stages.unique_id}, //@ts-ignore
+                    include: [workflowTypeAction] 
+                })
+
+                const stage = await this.stageModel.update({ 
+                    //@ts-ignore
+                    name: bodyStage[cat].nameStage, 
+                    description: bodyStage[cat].nameStage ,
+                    order: bodyStage[cat].orderStage,
+                    updatedAt: new Date
+                }, {where: {unique_id: findStage.unique_id} }   );
+    
+                const findStageAction = await this.StageActionModel.findOne({where: {stageId: findStage.id} } )
+                if (findStage == null || !findStage ){return 'no hay resultados para stage'}
+                    
+                const typeStage = await this.StageActionModel.update({
+                    typeActionId: data.WorkflowStage[cat].typeAction[cat].typeActionId,
+                    status: data.WorkflowStage[cat].typeAction[cat].statusType
+                }, {where: {stageId: findStage.id}  }   )
+
+
+                /*if(stages .delete == true){
+                    console.log(bodyStage[cat].delete);
+                    console.log('hola');
+                                
+            }*/
+                console.log('actualizo');
+               // console.log(bodyStage[cat].delete);
+            //bodyStage[cat].delete = false   
+
+                if(bodyStage[cat].delete == true){
+                           
+                    const findheadV2 = await this.headModel.findOne({where: {unique_id: id}, //@ts-ignore
+                    include: [businessUnit]    } )
+
+
+                    if (findheadV2 == null || !findheadV2 ){return 'no existe este head'}
+
+                    return findheadV2
+
+                }
 
             }
-
- 
         }
+    }
 
 
         console.log('lo logro');
@@ -224,7 +227,7 @@ async Update(id, data: workflowDto){
             {model:businessUnit}]    } )
 
 
-        if (findheadV2 == null || !findheadV2 ){return 'no hay resultados para head'}
+        if (findheadV2 == null || !findheadV2 ){return 'no existe este head'}
 
         return findheadV2
 
@@ -233,3 +236,4 @@ async Update(id, data: workflowDto){
 
 
 }
+6

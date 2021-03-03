@@ -9,4 +9,5 @@ export interface FilterWithPagination {
   export interface PaginationOptionsInterface {
     limits: number;
     pages: number;
+    orden: string;
   }

@@ -1,10 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
-const port = 3030
+export const port = 3030
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
+  console.log(app);
+
+  app.enableCors();
   await app.listen(port);
+  
+  
   console.log('ejecutando en el puerto: '+ port);
   
 }

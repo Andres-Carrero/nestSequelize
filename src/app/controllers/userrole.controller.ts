@@ -42,6 +42,8 @@ export class UserRoleController {
         const datas = await this.services.getAll({
             limits: request.query.hasOwnProperty('limits') ? request.query.limits : 5,
             pages: request.query.hasOwnProperty('pages') ? request.query.pages : 0,
+            orden: request.query.hasOwnProperty('orden') ? request.query.orden : 'ASC',
+
           });
 
       return datas
