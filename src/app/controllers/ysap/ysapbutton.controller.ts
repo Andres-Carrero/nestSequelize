@@ -13,9 +13,9 @@ export class YsapButtonController{
     }
   
 
-    @Post('all')
-    async index(@Body() body){
-        const datas = await this.services.getAll({
+    @Post('all/:id')
+    async index(@Param('id') id:number, @Body() body){
+        const datas = await this.services.getAll(id, {
             limits: body.limits ? body.limits : 20,
             pages: body.pages ? body.pages : 0,
             orden: body.orden ? body.orden : 'ASC',
@@ -24,9 +24,9 @@ export class YsapButtonController{
     }
     
     
-    @Post()
-    create(@Headers() head, @Body() IndexDto:ButtonYsapDto):Promise<any>{      
-        return this.services.Create(head, IndexDto)
+    @Post('create')
+    create(@Body() IndexDto:ButtonYsapDto):Promise<any>{      
+        return this.services.Create(IndexDto)
     }
 
 

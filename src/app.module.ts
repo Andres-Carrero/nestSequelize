@@ -1,3 +1,5 @@
+import { YsapThirdWalletController } from './app/controllers/ysap/ysapthirdwallet.controller';
+import { YsapThirdWalletService } from './app/services/ysap/ysapthirdwallet.service';
 import { YsapPaymentService } from './app/services/ysap/ysappayment.service';
 import { YsapAddressService } from './app/services/ysap/ysapaddress.service';
 import { YsapButtonService } from './app/services/ysap/ysapbutton.service';

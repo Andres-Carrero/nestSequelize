@@ -21,6 +21,7 @@ export class AddressYsapDto {
     balance: string;
     deleteAt: string;
     status: string;
+    usersId: number
     unique_id: string;
 }
 
@@ -31,6 +32,7 @@ export class ButtonYsapDto {
     product: string;
     token: string;
     duration: Date;
+    apikey: string
     description: string;
     values: string;
     TypeCoin: string

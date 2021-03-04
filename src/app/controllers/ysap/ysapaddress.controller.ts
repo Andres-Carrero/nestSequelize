@@ -8,10 +8,10 @@ export class YsapAddressController {
     constructor(private services: YsapAddressService){}
 
     
-    @Post('all')
-    async index(@Body() body){
+    @Post('all/:id')
+    async index(@Param('id') id:number, @Body() body){
   
-        const datas = await this.services.getAll({
+        const datas = await this.services.getAll(id, {
             limits: body.limits ? body.limits : 20,
             pages: body.pages ? body.pages : 0,
             orden: body.orden ? body.orden : 'ASC',

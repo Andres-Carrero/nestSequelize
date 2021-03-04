@@ -1,5 +1,6 @@
 import { Column,Model,Table,Unique,DataType,AllowNull,DeletedAt,BelongsToMany,ForeignKey,BelongsTo} from 'sequelize-typescript';
 import { addressYsap } from './addressYsap';
+import { statusYsap } from './statusYsap';
 import { usersYsap } from './userYsap';
 
 
@@ -38,28 +39,35 @@ export class buttonYsap extends Model<buttonYsap>{
     @Column({type: DataType.STRING})
     values: string
 
-    @AllowNull(false)
-    @Column({type: DataType.STRING})
-    addressId: string;
+
 
     @AllowNull(false)
     @Column({type: DataType.STRING})
     TypeCoin: string;
 
 
-   /* @AllowNull(false) // @ts-ignore 
+    @AllowNull(false) // @ts-ignore 
     @ForeignKey(() => addressYsap)
     @Column
     addressId: number;
       
     // @ts-ignore 
     @BelongsTo(() => addressYsap)
-    address: addressYsap;*/
+    address: addressYsap;
 
     @AllowNull(false) // @ts-ignore 
     @ForeignKey(() => usersYsap)
     @Column
     txId: number;
+
+    @AllowNull(false) // @ts-ignore 
+    @ForeignKey(() => statusYsap)
+    @Column
+    statusId: number;
+      
+    // @ts-ignore 
+    @BelongsTo(() => statusYsap)
+    status: statusYsap;
       
     // @ts-ignore 
     @BelongsTo(() => usersYsap)
@@ -69,8 +77,7 @@ export class buttonYsap extends Model<buttonYsap>{
     @Column({type: DataType.DATE})
     deleteAt: Date
 
-    @Column({type: DataType.BOOLEAN, defaultValue: true })
-    status: boolean
+ 
 
     @Unique(true)
     @Column({type: DataType.STRING})

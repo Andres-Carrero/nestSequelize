@@ -1,44 +1,29 @@
 import { Column,Model,Table,Unique,DataType,AllowNull,DeletedAt,BelongsToMany,HasMany} from 'sequelize-typescript';
 import { addressYsap } from './addressYsap';
-import { buttonYsap } from './buttonYsap';
 
 
 @Table({
-    tableName: 'ysapUsers',
+    tableName: 'ysapThirdWallet',
     timestamps: true
 })
-export class usersYsap extends Model<usersYsap>{
-
-    @AllowNull(false)
-    @Column({type: DataType.STRING})
-    name: string
+export class thirdWalletYsap extends Model<thirdWalletYsap>{
 
     @Unique(true)
     @AllowNull(false)
     @Column({type: DataType.STRING})
-    email: string
+    name: string
 
     @AllowNull(false)
     @Column({type: DataType.STRING})
-    password: string
-
-    @AllowNull(true)
-    @Column({type: DataType.STRING})
-    apikey: string
-
+    description: string
 
     @AllowNull(false)
     @Column({type: DataType.STRING})
-    typeMoney: string
+    slug: string
 
     // @ts-ignore 
     @HasMany(() => addressYsap)
     address: addressYsap;
-
-
-    // @ts-ignore 
-    @HasMany(() => buttonYsap)
-    Buttons: buttonYsap;
 
     @DeletedAt
     @Column({type: DataType.DATE})
