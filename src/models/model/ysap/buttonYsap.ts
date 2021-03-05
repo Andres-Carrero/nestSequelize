@@ -1,11 +1,12 @@
 import { Column,Model,Table,Unique,DataType,AllowNull,DeletedAt,BelongsToMany,ForeignKey,BelongsTo} from 'sequelize-typescript';
 import { addressYsap } from './addressYsap';
+import { buttonsGenerateYsap } from './buttonsYsap';
 import { statusYsap } from './statusYsap';
 import { usersYsap } from './userYsap';
 
 
 @Table({
-    tableName: 'ysapButton',
+    tableName: 'ysapButtonPayment',
     timestamps: true
 })
 export class buttonYsap extends Model<buttonYsap>{
@@ -76,6 +77,15 @@ export class buttonYsap extends Model<buttonYsap>{
     @DeletedAt
     @Column({type: DataType.DATE})
     deleteAt: Date
+
+    @AllowNull(false) // @ts-ignore 
+    @ForeignKey(() => buttonsGenerateYsap)
+    @Column
+    buttonId: number;
+      
+    // @ts-ignore 
+    @BelongsTo(() => buttonsGenerateYsap)
+    button: buttonsGenerateYsap;
 
  
 

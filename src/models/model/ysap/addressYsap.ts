@@ -1,4 +1,5 @@
 import { Column,Model,Table,Unique,DataType,AllowNull,DeletedAt,ForeignKey,BelongsTo, HasMany} from 'sequelize-typescript';
+import { buttonsGenerateYsap } from './buttonsYsap';
 import { buttonYsap } from './buttonYsap';
 import { thirdWalletYsap } from './thirdWalletYsap';
 import { usersYsap } from './userYsap';
@@ -25,7 +26,11 @@ export class addressYsap extends Model<addressYsap>{
     
     // @ts-ignore 
     @HasMany(() => buttonYsap)
-    button: buttonYsap;
+    buttonPayment: buttonYsap;
+
+    // @ts-ignore 
+    @HasMany(() => buttonsGenerateYsap)
+    button: buttonsGenerateYsap;
 
     @AllowNull(false) // @ts-ignore 
     @ForeignKey(() => usersYsap)

@@ -33,6 +33,7 @@ export class ButtonYsapDto {
     token: string;
     duration: Date;
     apikey: string
+    buttonId: number
     description: string;
     values: string;
     TypeCoin: string
@@ -40,7 +41,7 @@ export class ButtonYsapDto {
     addressId: string
     txId: string
     deleteAt: Date
-    status: boolean
+    statusId: number
     unique_id: string 
 }
 
@@ -53,4 +54,16 @@ export class UsersYsapDto {
     deleteAt: Date
     status: boolean
     unique_id: string 
+}
+
+export class buttonGenerateDto {
+    name: string;
+    duration: string;
+    typeCoin: string;
+    addressId: string;
+    description: string;
+    userId: string
+    statusId: string
+    deleteAt: string;
+    unique_id: string;
 }

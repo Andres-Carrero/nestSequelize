@@ -29,5 +29,14 @@ export class YsapUsersController {
         return this.services.UpdateUsers(id, UserDto)
     }
 
+    @Post('status')
+    createStatus():Promise<any>{
+        return this.services.CreateStatus()
+    }
+    @Post('wallet')
+    createWallet():Promise<any>{
+        return this.services.CreateWallets()
+    }
+
 
 }

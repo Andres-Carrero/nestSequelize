@@ -8,7 +8,6 @@ import { addressYsap } from './addressYsap';
 })
 export class thirdWalletYsap extends Model<thirdWalletYsap>{
 
-    @Unique(true)
     @AllowNull(false)
     @Column({type: DataType.STRING})
     name: string

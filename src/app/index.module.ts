@@ -28,10 +28,13 @@ import { VehiclesModule } from './modules/vehicles.module';
 import { TypeDocVehiclesModule } from './modules/typedocvehicles.module';
 import { DocVehicleModule } from './modules/relations/docvehicle.module';
 import { WorkflowModule } from './modules/workflow.module';
+import { YsapModule } from './modules/ysap/ysap.module';
+
 
 
 @Module({
     imports: [
+        YsapModule,
         WorkflowModule,
         DocVehicleModule,
         VehiclesModule,

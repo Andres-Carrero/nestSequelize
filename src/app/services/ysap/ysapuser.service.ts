@@ -1,5 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { statusYsap } from 'src/models/model/ysap/statusYsap';
+import { thirdWalletYsap } from 'src/models/model/ysap/thirdWalletYsap';
 import { usersYsap } from 'src/models/model/ysap/userYsap';
 
 @Injectable()
@@ -7,13 +9,13 @@ export class YsapUserService {
     constructor(
         @InjectModel(usersYsap)
         private readonly UserModel: typeof usersYsap,
+        @InjectModel(statusYsap)
+        private readonly statusModel: typeof statusYsap,
+        @InjectModel(thirdWalletYsap)
+        private readonly walletModel: typeof thirdWalletYsap,
     ){}
 
-
-
-    async uuidUser(id):Promise<usersYsap>{
-      console.log(id);
-      
+    async uuidUser(id):Promise<usersYsap>{   
       const findiduser = await this.UserModel.findOne({where:{unique_id: id} })
       if (findiduser == null){
         throw new NotFoundException('No hay resultados')
@@ -22,9 +24,7 @@ export class YsapUserService {
     }
     
 
-    async CreateUsers(user):Promise<usersYsap>{
-
-      //@ts-ignore
+    async CreateUsers(user):Promise<usersYsap>{//@ts-ignore
       const newUser = await this.UserModel.create(user);
       return newUser
     }
@@ -35,79 +35,67 @@ export class YsapUserService {
       return user
     }
 
+    async CreateStatus():Promise<any>{//@ts-ignore
+      const status1 = {
+        id: 1,
+        name: 'Activo',
+      }
+      const status2 = {
+        id: 2,
+        name: 'Pendiente',
+      }
+      const status3 = {
+        id: 3,
+        name: 'Inhactivo',
+      }
 
-/*async login(body){
-    const passWordBody = body.password
-
-    const User = await this.UserModel.findOne({
-        where: {email: body.email}
-    })
-
-
-    const passwordWeb = User.password
-    if(passWordBody != passwordWeb){
-        thro
+      //@ts-ignore
+      const newStatus = await this.statusModel.create(status1)//@ts-ignore 
+      const newStatus2 = await this.statusModel.create(status2) //@ts-ignore
+      const newStatus3 = await this.statusModel.create(status3)
+      return {newStatus, newStatus2, newStatus3}
     }
-}
 
- loginWeb = async (req, res) => {
-        try {
-          const body = req.body
-          const email = body.email
-          const password = body.password
-      
-          // db.sequelize.options.logging = false
-      
-  
-      
-          const userFound = await User.findOne({
-            include: [{ model: Gender }],
-            where: { email, state_id: 1 },
-          })
-          if (!userFound)
-            return res
-              .status(400)
-              .send({ message: "El usuario esta erroneo o se encuentra inhabilitado o la contraseña son erroneas" })
-      
-          const hashPassword = userFound.dataValues.password
-          const canAccess = bcrypt.compareSync(password, hashPassword)
-          if (!canAccess)
-            return res
-              .status(400)
-              .send({ message: "El usuario o la contraseña son erroneas" })
-      
-          console.log("userFound.dataValues", userFound.dataValues)
-          const token = jwtService.createToken(userFound.dataValues)
-          if (!token) return res.status(400).send({ message: "Token no generado." })
-          
-          const id = userFound.dataValues.id
-          const ids = userFound.dataValues.dni
-          const userid = userFound.dataValues.caravela_user_id
-          const fName = userFound.dataValues.first_name
-          const sName = userFound.dataValues.second_name
-          const fSurname = userFound.dataValues.first_surname
-          const sSurname = userFound.dataValues.second_surname
-      
-          res.status(200).send({
-            success: true,
-            token,
-            identity: {
-              id,
-              ids,
-              userid,
-              fName,
-              sName,
-              fSurname,
-              sSurname,
-              email,
-              password,
-            },
-          })
-        } catch (error) {
-          console.log("Hubo un error iniciando sesión en BD remota: ", error)
-          return res
-            .status(400)
-            .send({ message: "Hubo un error iniciando sesión en BD remota." })
-        }
-      }*/
+    async CreateWallets():Promise<any>{//@ts-ignore
+      const wallet1 = {
+        id: 1,
+        name: 'Electrum',
+        description: 'V1',
+        slug: 'electrum',
+        unique_id: 'electrum_wallet'
+      }
+      const wallet2 = {
+        id: 2,
+        name: 'Binance',
+        description: 'V1',
+        slug: 'binance',
+        unique_id: 'binance_wallet'
+      }
+      const wallet3 = {
+        id: 3,
+        name: 'Blockonomics',
+        description: 'V1',
+        slug: 'blockonomics',
+        unique_id: 'blockonomics_wallet'
+      }
+      const wallet4 = {
+        id: 4,
+        name: 'Blockchain',
+        description: 'V1',
+        slug: 'blockchain',
+        unique_id: 'blockchain_wallet'
+      }
+
+      //@ts-ignore
+      const newWallet = await this.walletModel.create(wallet1 )//@ts-ignore
+      const newWallet2 = await this.walletModel.create(wallet2 )//@ts-ignore
+      const newWallet3 = await this.walletModel.create(wallet3 )//@ts-ignore
+      const newWallet4 = await this.walletModel.create(wallet4 )
+
+
+      return {newWallet, newWallet2, newWallet3, newWallet4}
+    }
+
+
+
 }

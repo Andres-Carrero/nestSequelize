@@ -3,7 +3,7 @@ import { ButtonYsapDto } from 'src/app/complements/dto/Ysap.dto';
 import { YsapButtonService } from 'src/app/services/ysap/ysapbutton.service';
 import { buttonYsap } from 'src/models/model/ysap/buttonYsap';
 
-@Controller('buttonYsap')
+@Controller('buttonPaymentsYsap')
 export class YsapButtonController{ 
     constructor(private services: YsapButtonService){}
 
