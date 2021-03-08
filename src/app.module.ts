@@ -1,3 +1,5 @@
+import { YsapBoxController } from './app/controllers/ysap/ysapbox.controller';
+import { BoxYsapService } from './app/services/ysap/boxysap.service';
 
 import { IndexModule } from './app/index.module';
 import { Module } from '@nestjs/common';

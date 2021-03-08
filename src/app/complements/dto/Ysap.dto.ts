@@ -67,3 +67,14 @@ export class buttonGenerateDto {
     deleteAt: string;
     unique_id: string;
 }
+
+export class BoxYsapDto {
+    title: string;
+    description: string;
+    statusId: string;
+    userId: string;
+    deleteAt: string
+    unique_id: string
+    addressId: string;
+
+}

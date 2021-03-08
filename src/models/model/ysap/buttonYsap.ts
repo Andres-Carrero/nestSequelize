@@ -1,5 +1,6 @@
 import { Column,Model,Table,Unique,DataType,AllowNull,DeletedAt,BelongsToMany,ForeignKey,BelongsTo} from 'sequelize-typescript';
 import { addressYsap } from './addressYsap';
+import { BoxYsap } from './boxYsap';
 import { buttonsGenerateYsap } from './buttonsYsap';
 import { statusYsap } from './statusYsap';
 import { usersYsap } from './userYsap';
@@ -40,7 +41,14 @@ export class buttonYsap extends Model<buttonYsap>{
     @Column({type: DataType.STRING})
     values: string
 
-
+    @AllowNull(true) // @ts-ignore 
+    @ForeignKey(() => BoxYsap)
+    @Column
+    boxId: number;
+      
+    // @ts-ignore 
+    @BelongsTo(() => BoxYsap)
+    box: BoxYsap;
 
     @AllowNull(false)
     @Column({type: DataType.STRING})

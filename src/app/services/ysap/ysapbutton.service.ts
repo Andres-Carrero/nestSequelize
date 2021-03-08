@@ -13,6 +13,7 @@ import { buttonsGenerateYsap } from 'src/models/model/ysap/buttonsYsap';
 
 @Injectable()
 export class YsapButtonService { 
+    NewData: any = []
     constructor(
         @InjectModel(buttonYsap)
         private readonly Model: typeof buttonYsap,
@@ -27,7 +28,6 @@ export class YsapButtonService {
  
     
 async Create(data):Promise<any>{
-    
     const address = data.addressId
     const headers = data.apikey
     const button = data.buttonId
@@ -40,61 +40,54 @@ async Create(data):Promise<any>{
     if (address == null || 
         address == undefined || 
         address == ""){
-        throw new Error("addressId no valida")
+        throw new Error("direccion no valida")
     }
     if (button == null || 
         button == undefined || 
         button == ""){
-        throw new Error("addressId no valida")
+        throw new Error("boton no valida")
     }
     const buttons = await this.buttonModel.findOne({where: {id: button} })
     if (!buttons || buttons.statusId == 3){
-        throw new Error("apiKey no encontrado")
+        throw new Error("button no encontrado")
     }
-
-    //@ts-ignore
-    const findApiKey = await this.userModel.findOne({where: {apikey: headers}, 
-        include: [buttonsGenerateYsap, buttonYsap] })
-    
-        const findButton = findApiKey.buttons
-    
-    
-       /* for (let index = 0; index < findButton[length] ; index++) {
-            console.log(findButton);
-            
-        }*/
-
-
-
-    
-    if (!findApiKey || findApiKey.status == false){
-        throw new Error("apiKey no encontrado")
-    }
-
-   
 
     const findAddress = await this.addressModel.findOne({where: {id: address}})
     if (!findAddress || findAddress.status == false){
-        throw new Error("addressId no encontrado")
+        throw new Error("direccion no encontrado")
     }
 
-    data.unique_id = uuidv4()
-    data.statusId = 1
-    data.createdAt = new Date
-    data.duration = moment(data.createdAt).add(10, "minutes")
-    data.txId = findApiKey.id
-    data.addressId = findAddress.id
+    //@ts-ignore
+    const findApiKey = await this.userModel.findOne({where: {apikey: headers}, include: [buttonYsap, buttonsGenerateYsap] })
+        if (!findApiKey || findApiKey.status == false){
+            throw new Error("apiKey no encontrado")
+        }
     
-    const NewData = await this.Model.create(data); //@ts-ignore
-    if (!NewData){
-        throw new Error("el pago no se logro realizar")
-    }
+        const findButton = findApiKey.buttons //@ts-ignore
+        for (let index = 0; index < findButton.length; index++) {
+            const element = findButton[index];
 
-    const redirect = `http://localhost:4200/YsapCheckout/${NewData.unique_id}`
-    const success = `Success:${NewData.unique_id}`
-    const cancel = `Cancel:${NewData.unique_id}`
-
-    return  {redirect: redirect, Success: success, cancel: cancel, paymentBody: NewData}
+            if(buttons.id == element.id){
+                data.unique_id = uuidv4()
+                data.statusId = 1
+                data.createdAt = new Date
+                data.duration = moment(data.createdAt).add(10, "minutes")
+                data.txId = findApiKey.id
+                data.addressId = findAddress.id
+                
+                const NewData = await this.Model.create(data); 
+                
+                if (!NewData || NewData.unique_id == undefined){
+                    throw new Error("el pago no se logro realizar")
+                }    
+                const redirect = `http://localhost:4200/YsapCheckout/${NewData.unique_id}`
+                const success = `Success:${NewData.unique_id}`
+                const cancel = `Cancel:${NewData.unique_id}`
+            
+                return  {redirect: redirect, Success: success, cancel: cancel, paymentBody: NewData}   
+            }     
+        }
+        throw new Error("boton no valido para este usuario")
 }
 
 
@@ -106,6 +99,8 @@ async Update(id, data ):Promise<any>{
 
 
 async findById(id):Promise<any>{   //@ts-ignore
+
+    
     const findid = await this.Model.findOne({   where: {unique_id: id}, include: [usersYsap, addressYsap] })
 
     if (findid == null || !findid){

@@ -1,4 +1,5 @@
 import { Column,Model,Table,Unique,DataType,AllowNull,DeletedAt,ForeignKey,BelongsTo, HasMany} from 'sequelize-typescript';
+import { BoxYsap } from './boxYsap';
 import { buttonsGenerateYsap } from './buttonsYsap';
 import { buttonYsap } from './buttonYsap';
 import { thirdWalletYsap } from './thirdWalletYsap';
@@ -60,6 +61,10 @@ export class addressYsap extends Model<addressYsap>{
     @Unique(true)
     @Column({type: DataType.STRING})
     unique_id: string 
+
+    // @ts-ignore 
+    @HasMany(() => BoxYsap)
+    box: BoxYsap;
 
     
 

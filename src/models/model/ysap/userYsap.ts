@@ -1,5 +1,6 @@
 import { Column,Model,Table,Unique,DataType,AllowNull,DeletedAt,BelongsToMany,HasMany} from 'sequelize-typescript';
 import { addressYsap } from './addressYsap';
+import { BoxYsap } from './boxYsap';
 import { buttonsGenerateYsap } from './buttonsYsap';
 import { buttonYsap } from './buttonYsap';
 
@@ -43,6 +44,10 @@ export class usersYsap extends Model<usersYsap>{
     // @ts-ignore 
     @HasMany(() => buttonYsap)
     ButtonsPayment: buttonYsap;
+
+    // @ts-ignore 
+    @HasMany(() => BoxYsap)
+    box: BoxYsap;
 
     @DeletedAt
     @Column({type: DataType.DATE})

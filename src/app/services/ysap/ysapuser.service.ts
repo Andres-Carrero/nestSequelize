@@ -35,7 +35,7 @@ export class YsapUserService {
       return user
     }
 
-    async CreateStatus():Promise<any>{//@ts-ignore
+    async CreateStatus():Promise<any>{
       const status1 = {
         id: 1,
         name: 'Activo',
@@ -56,7 +56,7 @@ export class YsapUserService {
       return {newStatus, newStatus2, newStatus3}
     }
 
-    async CreateWallets():Promise<any>{//@ts-ignore
+    async CreateWallets():Promise<any>{
       const wallet1 = {
         id: 1,
         name: 'Electrum',
