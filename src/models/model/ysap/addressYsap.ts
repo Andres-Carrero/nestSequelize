@@ -12,7 +12,6 @@ import { usersYsap } from './userYsap';
 })
 export class addressYsap extends Model<addressYsap>{
 
-    @Unique(true)
     @AllowNull(false)
     @Column({type: DataType.STRING})
     btcAddress: string

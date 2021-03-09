@@ -23,7 +23,7 @@ export class YsapAddressController {
     }
     
     @Post()
-    create(@Body() IndexDto:AddressYsapDto):Promise<addressYsap>{
+    create(@Body() IndexDto:AddressYsapDto):Promise<addressYsap>{ 
         return this.services.Create(IndexDto)
     }
 }

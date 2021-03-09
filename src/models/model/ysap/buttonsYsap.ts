@@ -17,10 +17,6 @@ export class buttonsGenerateYsap extends Model<buttonsGenerateYsap>{
     name: string
 
     @AllowNull(false)
-    @Column({type: DataType.DATE})
-    duration: Date
-
-    @AllowNull(false)
     @Column({type: DataType.STRING})
     typeCoin: string
 
@@ -49,6 +45,14 @@ export class buttonsGenerateYsap extends Model<buttonsGenerateYsap>{
     // @ts-ignore 
     @BelongsTo(() => statusYsap)
     status: statusYsap;
+
+    @AllowNull(false)
+    @Column({type: DataType.STRING})
+    success: string
+
+    @AllowNull(false)
+    @Column({type: DataType.STRING})
+    cancel: string
 
     @Unique(true)
     @Column({type: DataType.STRING})

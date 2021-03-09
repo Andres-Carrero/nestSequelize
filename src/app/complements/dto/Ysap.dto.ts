@@ -21,7 +21,7 @@ export class AddressYsapDto {
     balance: string;
     deleteAt: string;
     status: string;
-    usersId: number
+    usersId: string
     unique_id: string;
 }
 
@@ -40,6 +40,7 @@ export class ButtonYsapDto {
     createdAt: Date
     addressId: string
     txId: string
+    boxId: number
     deleteAt: Date
     statusId: number
     unique_id: string 
@@ -51,6 +52,7 @@ export class UsersYsapDto {
     password: string;
     apikey: string;
     updatedAt: Date
+    token: string
     deleteAt: Date
     status: boolean
     unique_id: string 
@@ -63,6 +65,8 @@ export class buttonGenerateDto {
     addressId: string;
     description: string;
     userId: string
+    success: string
+    cancel: string
     statusId: string
     deleteAt: string;
     unique_id: string;
@@ -76,5 +80,17 @@ export class BoxYsapDto {
     deleteAt: string
     unique_id: string
     addressId: string;
+}
 
+export class RolesYsapDto {
+    name: string;
+    description: string;
+    statusId: string;
+    unique_id: string;
+    deleteAt: string
+}
+
+export class LoginYsapDto {
+    email: string;
+    passoword: string;
 }

@@ -1,13 +1,16 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Headers } from '@nestjs/common';
 import { YsapUserService } from 'src/app/services/ysap/ysapuser.service';
 import { v4 as uuidv4 } from 'uuid';
 
+
 import { usersYsap } from 'src/models/model/ysap/userYsap';
-import { UsersYsapDto } from "../../complements/dto/Ysap.dto";
+import { LoginYsapDto, UsersYsapDto } from "../../complements/dto/Ysap.dto";
 
 @Controller('userYsap')
 export class YsapUsersController {
-    constructor(private services: YsapUserService){}
+    constructor(
+        private services: YsapUserService,
+        ){}
 
 
     @Get(':id')
@@ -15,6 +18,10 @@ export class YsapUsersController {
         return this.services.uuidUser(id);
     }
   
+    @Post('login')
+    login(@Body() UserDto:LoginYsapDto):Promise<any>{ 
+        return this.services.loginYsap(UserDto)
+    }
 
     @Post()
     create(@Body() UserDto:UsersYsapDto):Promise<usersYsap>{
@@ -24,9 +31,11 @@ export class YsapUsersController {
 
 
     @Put(':id')
-    Update(@Param('id') id:number, @Body() UserDto:UsersYsapDto):Promise<usersYsap[]>{
+    Update(@Param('id') id:number, @Body() UserDto:UsersYsapDto){
+        const verifyToken = this.services.verifyTokenYsap(UserDto.token)
+        
         UserDto.updatedAt = new Date
-        return this.services.UpdateUsers(id, UserDto)
+        return  this.services.UpdateUsers(id, UserDto)
     }
 
     @Post('status')

@@ -16,7 +16,6 @@ export class YsapAddressService {
 
 
 async Create(data):Promise<addressYsap>{ 
-    console.log(data);
     const user = data.usersId
 
     if(!user || user == null || user == ""){
@@ -28,6 +27,8 @@ async Create(data):Promise<addressYsap>{
     if(!findUSer || findUSer == null ){
         throw new Error("usuario no existe en la DB")
     }
+    console.log(findUSer);
+    
 
     data.usersId = findUSer.id
     
@@ -40,10 +41,15 @@ async Create(data):Promise<addressYsap>{
 
 
 async getAll(id, options: PaginationOptionsInterface): Promise<any>{
+    const findUSer = await this.UserModel.findOne({where: {unique_id: id}})
+    if(!findUSer || findUSer == null ){
+        throw new Error("usuario no existe en la DB")
+    }
+
     const {count, rows} = await this.Model.findAndCountAll({
     limit: options.limits,
     order: [['id', options.orden]],
-    where: {usersId: id},
+    where: {usersId: findUSer.id},
     offset: options.pages, //@ts-ignore
     include: [thirdWalletYsap]
     });

@@ -1,8 +1,11 @@
-import { Column,Model,Table,Unique,DataType,AllowNull,DeletedAt,BelongsToMany,HasMany} from 'sequelize-typescript';
+import { Column,Model,Table,Unique,DataType,AllowNull,DeletedAt,ForeignKey,HasMany,BelongsTo} from 'sequelize-typescript';
 import { addressYsap } from './addressYsap';
+import { IsEmail, IsNotEmpty } from 'class-validator';
 import { BoxYsap } from './boxYsap';
 import { buttonsGenerateYsap } from './buttonsYsap';
 import { buttonYsap } from './buttonYsap';
+import { rolesYsap } from './rolesYsap';
+import { statusYsap } from './statusYsap';
 
 
 @Table({
@@ -16,7 +19,9 @@ export class usersYsap extends Model<usersYsap>{
     name: string
 
     @Unique(true)
+   
     @AllowNull(false)
+    @IsEmail()
     @Column({type: DataType.STRING})
     email: string
 
@@ -53,12 +58,28 @@ export class usersYsap extends Model<usersYsap>{
     @Column({type: DataType.DATE})
     deleteAt: Date
 
-    @Column({type: DataType.BOOLEAN, defaultValue: true })
-    status: boolean
 
     @Unique(true)
     @Column({type: DataType.STRING})
     unique_id: string 
+
+    @AllowNull(false) // @ts-ignore 
+    @ForeignKey(() => statusYsap)
+    @Column
+    statusId: number;
+      
+    // @ts-ignore 
+    @BelongsTo(() => statusYsap)
+    status: statusYsap;
+
+    @AllowNull(false) // @ts-ignore 
+    @ForeignKey(() => rolesYsap)
+    @Column
+    roleId: number;
+      
+    // @ts-ignore 
+    @BelongsTo(() => rolesYsap)
+    role: rolesYsap;
 
     
 

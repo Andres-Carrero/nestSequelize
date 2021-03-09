@@ -27,8 +27,6 @@ export class ButtonGenerateService {
 
  
     async Create(data):Promise<any>{
-        console.log(data);
-        
         const address = data.addressId
         const users = data.userId
     
@@ -43,38 +41,49 @@ export class ButtonGenerateService {
             throw new Error("Direccion no valida")
         }
         
-        //@ts-ignore
-        const findUser = await this.userModel.findOne({where: {id: users}, include: [buttonsGenerateYsap, buttonYsap] })
-        if (!findUser || findUser.status == false){
-            throw new Error("Usuario no encontrado")
-        }
-    
         const findAddress = await this.addressModel.findOne({where: {id: address}})
         if (!findAddress || findAddress.status == false){
             throw new Error("Direccion no encontrado")
         }
-    
-        data.statusId = 1
-        data.createdAt = new Date
-        data.duration = moment(data.createdAt).add(10, "minutes")
-        data.userId = findUser.id
-        data.addressId = findAddress.id
-        data.unique_id = uuidv4()
-
-        const NewData = await this.Model.create(data); //@ts-ignore
-        if (!NewData){
-            throw new Error("el pago no se logro realizar")
+        
+         //@ts-ignore
+        const findUser = await this.userModel.findOne({where: {unique_id: users}, include: [buttonsGenerateYsap, addressYsap, buttonYsap] })
+        if (!findUser || findUser.statusId == 3){
+            throw new Error("Usuario no encontrado")
         }
 
-        return  NewData
+        const idAddress = findUser.address //@ts-ignore
+        for (let index = 0; index < idAddress.length; index++) {
+            const element = idAddress[index];
+
+            if(findAddress.id === element.id){
+                data.statusId = 1
+                data.userId = findUser.id
+                data.addressId = findAddress.id
+                data.unique_id = uuidv4()
+        
+                const NewData = await this.Model.create(data); //@ts-ignore
+                if (!NewData){
+                    throw new Error("el pago no se logro realizar")
+                }
+
+                return  NewData
+            }
+        }
+        throw new Error("direccion no valida para este usuario")
     }
 
     
     async getAll(id, options: PaginationOptionsInterface): Promise<any>{
+        const findUser = await this.userModel.findOne({where: {unique_id: id} })
+        if (!findUser || findUser.statusId == 3){
+            throw new Error("Usuario no encontrado")
+        }
+
         const {count, rows} = await this.Model.findAndCountAll({
         limit: options.limits,
         order: [['id', options.orden]],
-        where: {userId: id},
+        where: {userId: findUser.id},
         offset: options.pages, //@ts-ignore
         include: [addressYsap, usersYsap, statusYsap, buttonYsap]
         });

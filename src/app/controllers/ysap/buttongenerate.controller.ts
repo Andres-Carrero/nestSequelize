@@ -9,8 +9,11 @@ export class ButtonGenerateController {
 
 
     @Post()
-    create(@Body() IndexDto:buttonGenerateDto):Promise<any>{      
-        return this.services.Create(IndexDto)
+    create(@Body() IndexDto:buttonGenerateDto):Promise<any>{   
+        const newData = this.services.Create(IndexDto)
+     
+        
+        return newData
     }
 
     @Post('all/:id')
