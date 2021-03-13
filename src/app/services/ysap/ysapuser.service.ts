@@ -20,8 +20,8 @@ export class YsapUserService {
         private readonly statusModel: typeof statusYsap,
         @InjectModel(thirdWalletYsap)
         private readonly walletModel: typeof thirdWalletYsap,
-  
-
+        @InjectModel(rolesYsap)
+        private readonly RolesModel: typeof rolesYsap,
     ){}
 
 
@@ -128,7 +128,6 @@ async CreateUsers(data):Promise<usersYsap>{
   const newUser = await this.UserModel.create(data);
     return newUser
 }
-          
 
 
 
@@ -137,65 +136,93 @@ async CreateStatus():Promise<any>{
       id: 1,
       name: 'Activo',
     }
-
     const status2 = {
       id: 2,
       name: 'Pendiente',
     }
-
     const status3 = {
       id: 3,
       name: 'Inhactivo',
-    }   //@ts-ignore
+    }
+  
+    const wallet1 = {
+      id: 1,
+      name: 'Electrum',
+      description: 'V1',
+      slug: 'electrum',
+      unique_id: 'electrum_wallet'
+    }
+    const wallet2 = {
+      id: 2,
+      name: 'Binance',
+      description: 'V1',
+      slug: 'binance',
+      unique_id: 'binance_wallet'
+    }
+    const wallet3 = {
+      id: 3,
+      name: 'Blockonomics',
+      description: 'V1',
+      slug: 'blockonomics',
+      unique_id: 'blockonomics_wallet'
+    }
+    const wallet4 = {
+      id: 4,
+      name: 'Blockchain',
+      description: 'V1',
+      slug: 'blockchain',
+      unique_id: 'blockchain_wallet'
+      
+    }
 
-  const newStatus = await this.statusModel.create(status1)//@ts-ignore 
-  const newStatus2 = await this.statusModel.create(status2) //@ts-ignore
-  const newStatus3 = await this.statusModel.create(status3)
-    return {newStatus, newStatus2, newStatus3}
+    const role1 = {
+      id: 1,
+      name: 'ADMINISTRADOR',
+      description: 'Admin',
+      statusId: 1,
+      unique_id: 'admin_role'
+    }
+    const role2 = {
+      id: 2,
+      name: 'CLIENTE',
+      description: 'Cliente',
+      statusId: 1,
+      unique_id: 'cliente_role'
+    }
+    
+    
+    //@ts-ignore
+
+  const newWallet1  = await this.walletModel.create(wallet1)//@ts-ignore
+  const newWallet2  = await this.walletModel.create(wallet2)//@ts-ignore
+  const newWallet3  = await this.walletModel.create(wallet3)//@ts-ignore
+  const newWallet4  = await this.walletModel.create(wallet4)//@ts-ignore
+
+  const newStatus   = await this.statusModel.create(status1)//@ts-ignore 
+  const newStatus2  = await this.statusModel.create(status2)//@ts-ignore
+  const newStatus3  = await this.statusModel.create(status3)//@ts-ignore
+
+  const newrole1  = await this.RolesModel.create(role1)//@ts-ignore
+  const newrole2  = await this.RolesModel.create(role2)//@ts-ignore
+
+    return [{
+      Status: {
+        newStatus, 
+        newStatus2, 
+        newStatus3}, 
+      wallets: {
+        newWallet1, 
+        newWallet2, 
+        newWallet3, 
+        newWallet4},
+      roles:{
+        newrole1,
+        newrole2
+      }
+      } ]
 }
 
 
-async CreateWallets():Promise<any>{
-  const wallet1 = {
-    id: 1,
-    name: 'Electrum',
-    description: 'V1',
-    slug: 'electrum',
-    unique_id: 'electrum_wallet'
-  }
-
-  const wallet2 = {
-    id: 2,
-    name: 'Binance',
-    description: 'V1',
-    slug: 'binance',
-    unique_id: 'binance_wallet'
-  }
-
-  const wallet3 = {
-    id: 3,
-    name: 'Blockonomics',
-    description: 'V1',
-    slug: 'blockonomics',
-    unique_id: 'blockonomics_wallet'
-  }
-
-
-  const wallet4 = {
-    id: 4,
-    name: 'Blockchain',
-    description: 'V1',
-    slug: 'blockchain',
-    unique_id: 'blockchain_wallet'
-  }           //@ts-ignore
-
-  const newWallet = await this.walletModel.create(wallet1 )//@ts-ignore
-  const newWallet2 = await this.walletModel.create(wallet2 )//@ts-ignore
-  const newWallet3 = await this.walletModel.create(wallet3 )//@ts-ignore
-  const newWallet4 = await this.walletModel.create(wallet4 )
-
-    return {newWallet, newWallet2, newWallet3, newWallet4}
-  }
 
 
 

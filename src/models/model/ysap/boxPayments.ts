@@ -7,17 +7,17 @@ import { usersYsap } from './userYsap';
 
 
 @Table({
-    tableName: 'ysapButtonPayment',
+    tableName: 'ysapBoxPayment',
     timestamps: true
 })
-export class buttonYsap extends Model<buttonYsap>{
+export class boxPaymentYsap extends Model<boxPaymentYsap>{
 
 
     @AllowNull(false)
     @Column({type: DataType.STRING})
     title: string
 
-    @AllowNull(false)
+    @AllowNull(false)    
     @Column({type: DataType.STRING})
     documentCurrency: string
 
@@ -35,24 +35,25 @@ export class buttonYsap extends Model<buttonYsap>{
 
     @AllowNull(false)
     @Column({type: DataType.STRING})
-    description: string 
+    description: string
 
     @AllowNull(false)
     @Column({type: DataType.STRING})
     values: string
 
+    @AllowNull(true) // @ts-ignore 
+    @ForeignKey(() => BoxYsap)
+    @Column
+    boxId: number;
+      
+    // @ts-ignore 
+    @BelongsTo(() => BoxYsap)
+    box: BoxYsap;
+
     @AllowNull(false)
     @Column({type: DataType.STRING})
     TypeCoin: string;
 
-    @AllowNull(false) // @ts-ignore 
-    @ForeignKey(() => buttonsGenerateYsap)
-    @Column
-    buttonId: number;
-      
-    // @ts-ignore 
-    @BelongsTo(() => buttonsGenerateYsap)
-    button: buttonsGenerateYsap;
 
     @AllowNull(false) // @ts-ignore 
     @ForeignKey(() => addressYsap)

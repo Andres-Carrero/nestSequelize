@@ -33,14 +33,32 @@ export class ButtonYsapDto {
     token: string;
     duration: Date;
     apikey: string
-    buttonId: number
+    buttonId: string
     description: string;
     values: string;
     TypeCoin: string
     createdAt: Date
     addressId: string
     txId: string
-    boxId: number
+    deleteAt: Date
+    statusId: number
+    unique_id: string 
+}
+
+export class BoxPaymentYsapDto {
+    title: string;
+    documentCurrency: string;
+    product: string;
+    token: string;
+    duration: Date;
+    apikey: string
+    description: string;
+    values: string;
+    TypeCoin: string
+    createdAt: Date
+    addressId: string
+    txId: string
+    boxId: string
     deleteAt: Date
     statusId: number
     unique_id: string 
@@ -93,4 +111,13 @@ export class RolesYsapDto {
 export class LoginYsapDto {
     email: string;
     passoword: string;
+}
+
+export class WalletsYsapDto{
+    unique_id: string 
+    name: string
+    description: string
+    userId: string;
+    deleteAt: Date
+    statusId: number;
 }

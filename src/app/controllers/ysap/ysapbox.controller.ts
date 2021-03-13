@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Param, Post, Put, Headers } from '@nestjs/common';
 import { BoxYsapDto } from 'src/app/complements/dto/Ysap.dto';
 import { BoxYsapService } from 'src/app/services/ysap/boxysap.service';
 
@@ -7,8 +7,11 @@ export class YsapBoxController {
     constructor(private services: BoxYsapService){}
 
     @Post()
-    async create(@Body() body: BoxYsapDto){
-        const newData = await this.services.create(body)
+    async create(@Body() body: BoxYsapDto, @Headers() headers){        
+        if(!headers.apikey){
+            throw new Error("apiKey no encontrado")
+        }
+        const newData = await this.services.create(headers, body)
         return newData
     }
 
@@ -19,6 +22,8 @@ export class YsapBoxController {
             limits: body.limits ? body.limits : 20,
             pages: body.pages ? body.pages : 0,
             orden: body.orden ? body.orden : 'ASC',
+            columns: body.columns,
+            filter: body.filter
           });
       return datas
     }

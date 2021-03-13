@@ -4,10 +4,6 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
-import { secretJWT } from "src/models/config/jwt.config";
-
 @Module({
   imports: [
     IndexModule,

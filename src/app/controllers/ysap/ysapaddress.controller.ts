@@ -15,6 +15,8 @@ export class YsapAddressController {
             limits: body.limits ? body.limits : 20,
             pages: body.pages ? body.pages : 0,
             orden: body.orden ? body.orden : 'ASC',
+            columns: body.columns,
+            filter: body.filter
           });
           //console.log(datas);
           

@@ -10,4 +10,10 @@ export interface FilterWithPagination {
     limits: number;
     pages: number;
     orden: string;
+    columns: string;
+    filter: {
+      status: number
+      search: string
+      //columns: string
+    }
   }

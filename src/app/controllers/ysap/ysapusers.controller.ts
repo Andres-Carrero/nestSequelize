@@ -17,6 +17,7 @@ export class YsapUsersController {
     findByUuid(@Param('id') id:number):Promise<usersYsap>{
         return this.services.uuidUser(id);
     }
+
   
     @Post('login')
     login(@Body() UserDto:LoginYsapDto):Promise<any>{ 
@@ -38,14 +39,11 @@ export class YsapUsersController {
         return  this.services.UpdateUsers(id, UserDto)
     }
 
-    @Post('status')
+    @Post('data')
     createStatus():Promise<any>{
         return this.services.CreateStatus()
     }
-    @Post('wallet')
-    createWallet():Promise<any>{
-        return this.services.CreateWallets()
-    }
+
 
 
 }

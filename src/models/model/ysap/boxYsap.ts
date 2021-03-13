@@ -1,5 +1,6 @@
 import { Column,Model,Table,Unique,DataType,AllowNull,DeletedAt,HasMany,ForeignKey,BelongsTo} from 'sequelize-typescript';
 import { addressYsap } from './addressYsap';
+import { boxPaymentYsap } from './boxPayments';
 import { buttonsGenerateYsap } from './buttonsYsap';
 import { buttonYsap } from './buttonYsap';
 import { statusYsap } from './statusYsap';
@@ -47,8 +48,8 @@ export class BoxYsap extends Model<BoxYsap>{
     unique_id: string 
 
     // @ts-ignore 
-    @HasMany(() => buttonYsap)
-    buttonPayment: buttonYsap;
+    @HasMany(() => boxPaymentYsap)
+    boxsPayments: boxPaymentYsap;
 
     @AllowNull(false) // @ts-ignore 
     @ForeignKey(() => addressYsap)

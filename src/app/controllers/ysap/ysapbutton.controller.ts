@@ -15,10 +15,18 @@ export class YsapButtonController{
 
     @Post('all/:id')
     async index(@Param('id') id:number, @Body() body){
+        console.log(body);
+        
+
         const datas = await this.services.getAll(id, {
-            limits: body.limits ? body.limits : 20,
+            limits: body.limits ? body.limits : 1000,
             pages: body.pages ? body.pages : 0,
             orden: body.orden ? body.orden : 'ASC',
+            columns: body.columns,
+            filter: {
+                status: body.filter.status,
+                search: body.filter.search
+            }
           });
       return datas
     }

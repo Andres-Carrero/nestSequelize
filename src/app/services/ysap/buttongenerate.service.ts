@@ -10,6 +10,7 @@ import { addressYsap } from 'src/models/model/ysap/addressYsap';
 import { PaginationOptionsInterface } from 'src/app/complements/interface/paginator.interface';
 import { statusYsap } from 'src/models/model/ysap/statusYsap';
 import { buttonYsap } from 'src/models/model/ysap/buttonYsap';
+import { BoxYsap } from "src/models/model/ysap/boxYsap";
 
 @Injectable()
 export class ButtonGenerateService {
@@ -47,7 +48,7 @@ export class ButtonGenerateService {
         }
         
          //@ts-ignore
-        const findUser = await this.userModel.findOne({where: {unique_id: users}, include: [buttonsGenerateYsap, addressYsap, buttonYsap] })
+        const findUser = await this.userModel.findOne({where: {unique_id: users}, include: [buttonsGenerateYsap, BoxYsap, addressYsap, buttonYsap] })
         if (!findUser || findUser.statusId == 3){
             throw new Error("Usuario no encontrado")
         }
@@ -75,7 +76,7 @@ export class ButtonGenerateService {
 
     
     async getAll(id, options: PaginationOptionsInterface): Promise<any>{
-        const findUser = await this.userModel.findOne({where: {unique_id: id} })
+        const findUser = await this.userModel.findOne({where: {unique_id: id}, })
         if (!findUser || findUser.statusId == 3){
             throw new Error("Usuario no encontrado")
         }
@@ -85,7 +86,7 @@ export class ButtonGenerateService {
         order: [['id', options.orden]],
         where: {userId: findUser.id},
         offset: options.pages, //@ts-ignore
-        include: [addressYsap, usersYsap, statusYsap, buttonYsap]
+        include: [addressYsap, {model: usersYsap, include: [BoxYsap] }, statusYsap, buttonYsap]
         });
      
     

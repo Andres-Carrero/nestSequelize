@@ -3,20 +3,23 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { ButtonGenerateController } from 'src/app/controllers/ysap/buttongenerate.controller';
 import { YsapAddressController } from 'src/app/controllers/ysap/ysapaddress.controller';
 import { YsapBoxController } from 'src/app/controllers/ysap/ysapbox.controller';
+import { YsapBoxPaymentController } from 'src/app/controllers/ysap/ysapboxpayment.controller';
 import { YsapButtonController } from 'src/app/controllers/ysap/ysapbutton.controller';
 import { YsapPaymentController } from 'src/app/controllers/ysap/ysappayment.controller';
-import { YsapRolesController } from 'src/app/controllers/ysap/ysaproles.controller';
 import { YsapThirdWalletController } from 'src/app/controllers/ysap/ysapthirdwallet.controller';
 import { YsapUsersController } from 'src/app/controllers/ysap/ysapusers.controller';
+import { YsapWalletsController } from 'src/app/controllers/ysap/ysapwallets.controller';
 import { BoxYsapService } from 'src/app/services/ysap/boxysap.service';
 import { ButtonGenerateService } from 'src/app/services/ysap/buttongenerate.service';
 import { YsapAddressService } from 'src/app/services/ysap/ysapaddress.service';
+import { YsapBoxPaymentService } from 'src/app/services/ysap/ysapboxpayment.service';
 import { YsapButtonService } from 'src/app/services/ysap/ysapbutton.service';
 import { YsapPaymentService } from 'src/app/services/ysap/ysappayment.service';
-import { YsapRolesService } from 'src/app/services/ysap/ysaproles.service';
 import { YsapThirdWalletService } from 'src/app/services/ysap/ysapthirdwallet.service';
 import { YsapUserService } from 'src/app/services/ysap/ysapuser.service';
+import { YsapWalletsService } from 'src/app/services/ysap/ysapwallets.service';
 import { addressYsap } from 'src/models/model/ysap/addressYsap';
+import { boxPaymentYsap } from 'src/models/model/ysap/boxPayments';
 import { BoxYsap } from 'src/models/model/ysap/boxYsap';
 import { buttonsGenerateYsap } from 'src/models/model/ysap/buttonsYsap';
 import { buttonYsap } from 'src/models/model/ysap/buttonYsap';
@@ -25,6 +28,7 @@ import { rolesYsap } from 'src/models/model/ysap/rolesYsap';
 import { statusYsap } from 'src/models/model/ysap/statusYsap';
 import { thirdWalletYsap } from 'src/models/model/ysap/thirdWalletYsap';
 import { usersYsap } from 'src/models/model/ysap/userYsap';
+import { WalletsYsap } from 'src/models/model/ysap/walletsYsap';
 
 @Module({
     imports: [
@@ -39,6 +43,8 @@ import { usersYsap } from 'src/models/model/ysap/userYsap';
             buttonsGenerateYsap,
             BoxYsap,
             rolesYsap,
+            boxPaymentYsap,
+            WalletsYsap
         ]),
     ],
     controllers: [
@@ -49,7 +55,8 @@ import { usersYsap } from 'src/models/model/ysap/userYsap';
         YsapThirdWalletController,
         ButtonGenerateController,
         YsapBoxController,
-        YsapRolesController
+        YsapBoxPaymentController,
+        YsapWalletsController
     ],
     providers: [
         YsapUserService,
@@ -59,7 +66,8 @@ import { usersYsap } from 'src/models/model/ysap/userYsap';
         YsapThirdWalletService,
         ButtonGenerateService,
         BoxYsapService,
-        YsapRolesService,
+        YsapBoxPaymentService,
+        YsapWalletsService
         
     ],
 })

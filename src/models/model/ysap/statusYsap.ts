@@ -4,6 +4,7 @@ import { buttonsGenerateYsap } from './buttonsYsap';
 import { buttonYsap } from './buttonYsap';
 import { thirdWalletYsap } from './thirdWalletYsap';
 import { usersYsap } from './userYsap';
+import { WalletsYsap } from './walletsYsap';
 
 
 @Table({
@@ -28,6 +29,10 @@ export class statusYsap extends Model<statusYsap>{
     // @ts-ignore 
     @HasMany(() => BoxYsap)
     box: BoxYsap;
+
+    // @ts-ignore 
+    @HasMany(() => WalletsYsap)
+    wallets: WalletsYsap;
 
 
 }

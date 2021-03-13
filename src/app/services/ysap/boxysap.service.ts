@@ -22,20 +22,31 @@ box: any = []
         private readonly addressModel: typeof addressYsap,
     ){}
 
-    async create(data){      
+
+
+
+
+    async create(headers, data){ 
+
         const user = data.userId
         const address = data.addressId
+        console.log(address);
+        
 
         const findAddress = await this.addressModel.findOne({where: {id: address}})
         if(!findAddress){throw new Error("Direccion no encontrada")}
 
         //@ts-ignore
-        const findUser = await this.userModel.findOne({where: {unique_id: user}, include: [addressYsap]   })
+        const findUser = await this.userModel.findOne({where: {apikey: headers.apikey}, include: [addressYsap]   })
         if(!findUser){throw new Error("usuario no encontrado")}
         const idAddress = findUser.address //@ts-ignore
+        
 
         for (let index = 0; index < idAddress.length; index++) {
             const element = idAddress[index];
+
+            console.log(element);
+            
             
             if(findAddress.id === element.id){
                 data.userId = findUser.id

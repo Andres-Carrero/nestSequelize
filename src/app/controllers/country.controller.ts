@@ -16,6 +16,8 @@ export class CountryController {
             limits: request.query.hasOwnProperty('limits') ? request.query.limits : 5,
             pages: request.query.hasOwnProperty('pages') ? request.query.pages : 0,
             orden: request.query.hasOwnProperty('orden') ? request.query.orden : 'ASC',
+            columns: request.query.columns,
+            filter: request.query.filter
 
           });
 

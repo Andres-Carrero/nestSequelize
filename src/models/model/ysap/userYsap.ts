@@ -6,6 +6,7 @@ import { buttonsGenerateYsap } from './buttonsYsap';
 import { buttonYsap } from './buttonYsap';
 import { rolesYsap } from './rolesYsap';
 import { statusYsap } from './statusYsap';
+import { WalletsYsap } from './walletsYsap';
 
 
 @Table({
@@ -71,6 +72,10 @@ export class usersYsap extends Model<usersYsap>{
     // @ts-ignore 
     @BelongsTo(() => statusYsap)
     status: statusYsap;
+
+    // @ts-ignore 
+    @HasMany(() => WalletsYsap)
+    wallets: WalletsYsap;
 
     @AllowNull(false) // @ts-ignore 
     @ForeignKey(() => rolesYsap)
