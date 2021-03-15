@@ -15,7 +15,7 @@ export class YsapButtonController{
 
     @Post('all/:id')
     async index(@Param('id') id:number, @Body() body){
-        console.log(body);
+        console.log('controller-backend',body);
         
 
         const datas = await this.services.getAll(id, {
@@ -25,7 +25,10 @@ export class YsapButtonController{
             columns: body.columns,
             filter: {
                 status: body.filter.status,
-                search: body.filter.search
+                search:  body.filter.search,
+                dateStart:  body.filter.dateStart,
+                dateEnd:  body.filter.dateEnd,
+                //search: body.filter.search
             }
           });
       return datas

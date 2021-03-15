@@ -14,6 +14,8 @@ export interface FilterWithPagination {
     filter: {
       status: number
       search: string
+      dateStart: string
+      dateEnd: string
       //columns: string
     }
   }

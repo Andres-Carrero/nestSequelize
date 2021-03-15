@@ -7,6 +7,7 @@ import { statusYsap } from 'src/models/model/ysap/statusYsap';
 import { usersYsap } from 'src/models/model/ysap/userYsap';
 import * as moment from "moment";
 import { v4 as uuidv4 } from 'uuid';
+import {Op} from "sequelize";
 import { buttonsGenerateYsap } from 'src/models/model/ysap/buttonsYsap';
 import { PaginationOptionsInterface } from 'src/app/complements/interface/paginator.interface';
 
@@ -82,7 +83,7 @@ async CreateBoxPayment(data):Promise<any>{
     
                         data.unique_id = uuidv4()
                         data.statusId = 1
-                        data.createdAt = new Date
+                        data.createdAt = moment.utc(new Date)
                         data.duration = moment(data.createdAt).add(10, "minutes")
                         data.txId = findApiKey.id
                         data.addressId = findAddress.id
@@ -109,14 +110,81 @@ async CreateBoxPayment(data):Promise<any>{
     }
 
 
-    async getAll(id, options: PaginationOptionsInterface): Promise<any>{
+
+async getAll(id, options: PaginationOptionsInterface): Promise<any>{
+    const Filters = options.filter
+    const DateStart = options.filter.dateStart 
+    const DateEnd = options.filter.dateEnd
+    const status = options.filter.status
+    let where = {}
     
+        if(!Filters.status){
+            where = {txId: id}   
+        }
+    
+        if(!Filters.dateStart){
+            where = {txId: id}   
+        }
+        if(!Filters.dateEnd){
+            where = {txId: id}   
+        }
+    
+        if(Filters.status){
+            if(Filters.status == 4){
+                where = {txId: id}   
+            }
+            if( Filters.status == 1 || 
+                Filters.status == 2 || 
+                Filters.status == 3){  
+                    where = {
+                        txId: id, 
+                        statusId: status
+                    }   
+            }
+        }
+    
+    
+        if(Filters.dateStart){
+    
+            if(!Filters.dateEnd){   
+                where = {txId: id}   
+            }
+    
+            if(Filters.dateEnd){    
+                where = {
+                    txId: id, 
+                    createdAt: {[Op.between]:[DateStart, DateEnd]} 
+                }     
+            }
+    
+            if(Filters.status){
+    
+                if(Filters.status == 4){
+                    where = {
+                        txId: id,
+                        createdAt: {[Op.between]:[DateStart, DateEnd]}  
+                    }     
+                }
+    
+                if( Filters.status == 1 || 
+                    Filters.status == 2 || 
+                    Filters.status == 3){   
+                        where = {   
+                            txId: id, 
+                            statusId: status, 
+                            createdAt: { [Op.between]: [DateStart, DateEnd] }  
+                        }
+                }
+            }
+        }
+
+
         const {count, rows} = await this.Model.findAndCountAll({
         limit: options.limits,
         order: [['id', options.orden]],
         offset: options.pages, //@ts-ignore
         include: [{model: statusYsap, attributes: ['name']}, {model:BoxYsap},{model: addressYsap}],
-        where: {txId: id, statusId: 1,}
+        where
         });
      
     

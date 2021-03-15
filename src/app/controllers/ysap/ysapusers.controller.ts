@@ -13,6 +13,7 @@ export class YsapUsersController {
         ){}
 
 
+
     @Get(':id')
     findByUuid(@Param('id') id:number):Promise<usersYsap>{
         return this.services.uuidUser(id);

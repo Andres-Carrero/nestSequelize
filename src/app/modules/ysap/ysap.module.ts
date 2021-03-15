@@ -6,6 +6,7 @@ import { YsapBoxController } from 'src/app/controllers/ysap/ysapbox.controller';
 import { YsapBoxPaymentController } from 'src/app/controllers/ysap/ysapboxpayment.controller';
 import { YsapButtonController } from 'src/app/controllers/ysap/ysapbutton.controller';
 import { YsapPaymentController } from 'src/app/controllers/ysap/ysappayment.controller';
+import { YsapPruebasController } from 'src/app/controllers/ysap/ysappruebas.controller';
 import { YsapThirdWalletController } from 'src/app/controllers/ysap/ysapthirdwallet.controller';
 import { YsapUsersController } from 'src/app/controllers/ysap/ysapusers.controller';
 import { YsapWalletsController } from 'src/app/controllers/ysap/ysapwallets.controller';
@@ -15,6 +16,7 @@ import { YsapAddressService } from 'src/app/services/ysap/ysapaddress.service';
 import { YsapBoxPaymentService } from 'src/app/services/ysap/ysapboxpayment.service';
 import { YsapButtonService } from 'src/app/services/ysap/ysapbutton.service';
 import { YsapPaymentService } from 'src/app/services/ysap/ysappayment.service';
+import { YsapPruebasService } from 'src/app/services/ysap/ysappruebas.service';
 import { YsapThirdWalletService } from 'src/app/services/ysap/ysapthirdwallet.service';
 import { YsapUserService } from 'src/app/services/ysap/ysapuser.service';
 import { YsapWalletsService } from 'src/app/services/ysap/ysapwallets.service';
@@ -56,7 +58,8 @@ import { WalletsYsap } from 'src/models/model/ysap/walletsYsap';
         ButtonGenerateController,
         YsapBoxController,
         YsapBoxPaymentController,
-        YsapWalletsController
+        YsapWalletsController,
+        YsapPruebasController
     ],
     providers: [
         YsapUserService,
@@ -67,7 +70,8 @@ import { WalletsYsap } from 'src/models/model/ysap/walletsYsap';
         ButtonGenerateService,
         BoxYsapService,
         YsapBoxPaymentService,
-        YsapWalletsService
+        YsapWalletsService,
+        YsapPruebasService
         
     ],
 })
