@@ -204,10 +204,7 @@ async getAll(id, options: PaginationOptionsInterface): Promise<any>{
 
 
     const {count, rows} = await this.Model.findAndCountAll({
-    where,
-    limit: options.limits,
-    order: [['id', options.orden]],
-    offset: options.pages, //@ts-ignore
+    where,  //@ts-ignore
     include: [{model: statusYsap, attributes: ['name']}, {model:buttonsGenerateYsap},{model: addressYsap}],
     });
  
